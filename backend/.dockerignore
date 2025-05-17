@@ -1,0 +1,30 @@
+# 排除 Python 的虛擬環境資料夾
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 排除 Docker 構建過程中的檔案和資料夾
+.dockerignore
+Dockerfile
+docker-compose.yml
+*.log
+
+# 排除開發過程中生成的檔案
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# 排除本地環境設定
+.env
+
+# 排除 IDE 和編輯器設定檔
+.idea/
+.vscode/
+*.iml
+
+# 排除操作系統的隱藏檔案
+.DS_Store
+Thumbs.db
