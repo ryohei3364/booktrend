@@ -1,0 +1,125 @@
+section{
+	width: 100%;
+}
+/* .slogan {
+  width: 1200px;
+  height: 500px;
+  font-size: 36px;
+  color: red;
+} */
+.background{
+	width: 100%;
+	height: 600px;
+	background: url("../images/2151040342.jpg") center center / 100% no-repeat;
+}
+.main__card--container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+.main__card {
+  flex: 1 1 calc((100% - 48px) / 2); /* 2 欄卡片 */
+  max-width: calc((100% - 48px) / 2);
+  /* height: 1200px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+.main__card:hover {
+  box-shadow: 0 12px 32px var(--hover-shadow);
+  transform: translateY(-8px);
+  border-color: var(--mintgreen-color);
+}
+.main__card .map {
+  width: 250px;
+  height: 150px;
+  border-radius: 0 8px 8px 0;
+  object-fit: contain;    /* 保持比例、不裁切 */
+  box-shadow: 0 4px 12px var(--card-border);
+  margin: 16px 0;
+}
+
+.main__card .logo {
+  width: 250px;       /* 限制最大寬度 */
+  height: 150px;      /* 限制最大高度 */
+  object-fit: contain;    /* 保持比例、不裁切 */
+  border-radius: 8px 0 0 8px;
+  box-shadow: 0 4px 12px var(--card-border);
+  background-color: white;
+}
+
+.main__card span {
+  width: 100%;
+  text-align: center;
+}
+.main__card--title {
+  display: flex;
+  /* flex-direction: column;
+  justify-content: center; */
+  flex-direction: row;
+  align-items: center;
+}
+.main__card--country {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+.main__card--section {
+  width: 500px;   
+  margin-bottom: 12px;
+  border: 1px solid var(--lightgrey-color);
+  background-color: var(--lightbrown-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.main__card--section span {
+  display: flex;
+  justify-content: flex-start;
+  /* font-size: 1.1rem; */
+  font-weight: 400;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  text-align: center;
+  text-indent: 20px;
+  cursor: pointer;
+  padding: 20px;
+}
+
+/* 收合狀態 */
+.section-content.collapsed {
+  padding: 0 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.section-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.section-content img {
+  width: 130px;
+  height: auto;
+  object-fit: contain;  
+  background-color: var(--lightbrown-color);
+  /* margin: 0 auto; */
+  /* background: #fff; */
+}
+.book-card {
+  width: 150px;
+  flex-wrap: wrap;
+}
+.book-card h4 {
+  color: var(--mintgreen-color);
+}
+.collapsed {
+  display: none; /* 正確隱藏內容*/
+}

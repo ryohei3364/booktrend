@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BookTrend 全球書籍儀表板</title>
+  <link rel="icon" href="./static/images/favicon.png" type="image/png">
+  <link rel="stylesheet" type="text/css" href="./static/style/core.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/style/index.css"/>
+  <script async src="https://d3js.org/d3.v7.min.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/d3-cloud/build/d3.layout.cloud.min.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script async src="./static/script/index.js"></script>
+</head>
+<body>
+	<nav class="menu">
+    <nav class="menu__item">
+      <div class="menu__item--container--left">
+        <a class="menu__item--icon" href="/">
+          <img src="static/images/world-book-day.png" alt="book icon" title="book icon">
+        </a>
+        <div class="menu__item--text">
+          <a class="menu__item--text--EN" href="/">BookTrend</a>
+          <div class="menu__item--header">
+            <a href="/search" class="menu__item--header--a">搜尋</a>
+            <!-- <a href="#" class="menu__item--header--a">書籍</a> -->
+            <a href="/ranking" class="menu__item--header--a">排行榜</a>
+          </div>
+        </div>
+      </div>
+      <div class="menu__item--container--right">
+        <!-- <form class="menu__item--search" role="search"> 
+          <input type="search" class="form-control" placeholder="搜尋關鍵字" aria-label="Search"> 
+        </form> -->
+        <div class="menu__item--language" id="langSwitcher">
+          <a href="#" class="menu__item--language--toggle">TW</a>
+          <ul class="menu__item--language--dropdown">
+            <li><a href="#">繁體中文</a></li>
+            <li><a href="#">English</a></li>
+            <li><a href="#">Deutsch</a></li>
+            <li><a href="#">Français</a></li>
+          </ul>
+        </div>
+        <div class="menu__item--member">
+          <a href="#" class="menu__item--member--user">
+            <img src="static/images/98681.jpeg" alt="photo" class="rounded-circle";>
+          </a>
+      </div>
+    </nav>
+	</nav>
+  <section>
+    <div class="slogan">書，照見一個國家的深層樣貌。</div>
+    <div class="background"></div>
+  </section>
+  <main>
+    <div class="main__card--container"></div>
+  </main>
+  <footer>
+    <div class="footer__container">COPYRIGHT © 2025 BookTrend</div>
+  </footer>
+</body>
+</html>
