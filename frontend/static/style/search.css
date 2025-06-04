@@ -1,0 +1,115 @@
+main {
+	margin-top: 105px;
+}
+
+#title {
+	margin: 20px 0;
+	font-size: 24px;
+}
+
+.search__container--inner {
+  display: flex;
+  align-items: center;
+	height: 50px;                     /* ✅ 控制整體高度 */
+	width: 600px;
+  border: 1px solid var(--lightgrey-color);
+  border-radius: 4px;
+  padding: 0 4px;              /* 不要內邊距 */
+  overflow: hidden;        /* 圓角不要跑出來 */
+	background-color: white;
+}
+.search__container--inner svg {
+  width: 45px;
+  height: 45px;
+  border: none;
+  margin: 0;        
+  flex-shrink: 0;          /* 不要被壓縮 */
+	background-color: white;
+	fill: var(--darkgrey-color);
+}
+
+ /* 搜尋輸入框 */
+.SVG__search--input {
+  border: none;
+  outline: none;
+	line-height: 50px;     
+  height: 100%;
+  flex: 1;
+	background-color: white;
+}
+
+.search__results {
+	width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+/* 每本書的外觀設定 */
+
+/* 搜尋列出來的項目列表 */
+.search__topic {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 每個項目 */
+.search__topic--item {
+	width: 600px;
+  height: 50px;                        /* ✅ 高度跟搜尋框一樣 */
+  line-height: 50px;                   /* ✅ 垂直置中文字 */
+  padding: 0 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
+	text-align: center;
+}
+
+/* Hover 效果（可選） */
+.search__topic--item:hover {
+	color: var(--mintgreen-color);
+	border: 1px solid var(--mintgreen-color);
+}
+
+
+.book-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 12px;
+}
+
+/* 書籍圖片大小 */
+.book-item img {
+  width: 80px;     /* 調整圖片寬度 */
+  height: auto;    /* 保持原始比例 */
+  border-radius: 4px;
+}
+
+/* 書名樣式 */
+.book-item h3 {
+  font-size: 16px;   /* 書名字體大小 */
+  margin: 0;
+}
+
+/* 書籍說明樣式 */
+.book-item p {
+  font-size: 14px;
+  color: #444;
+  margin-top: 4px;
+}
+
+/* 高亮文字樣式 */
+mark {
+  background-color: yellow;
+  color: black;
+}
+
+.footer__container {
+  display: none;
+}
