@@ -1,4 +1,4 @@
-from mysql.connector import pooling
+from mysql.connector import pooling, Error
 from dotenv import load_dotenv
 import os, logging, time
 
@@ -73,6 +73,10 @@ class SQLPool:
       conn.close()  # 歸還連線
       
   def check_processlist(self):
+    """檢查連線狀態，並在環境允許下終止長時間 idle 的 thread"""
+    if os.getenv("ENABLE_PROCESSLIST_CHECK") != "1":
+      return  # 僅當環境變數開啟時執行
+    
     conn = self.get_pool_connection()
     cursor = conn.cursor(dictionary=True)
     try:
@@ -95,8 +99,11 @@ class SQLPool:
       
       for process in processlist:
         if process["Command"] == "Sleep" and process["Time"] > 10:
-          cursor.execute(f"KILL {process['Id']}")
-          print(f"Killed connection {process['Id']} - Sleep for {process['Time']} seconds.")
+          try:
+            cursor.execute(f"KILL {process['Id']}")
+            print(f"Killed connection {process['Id']} - Sleep for {process['Time']} seconds.")
+          except Error as e:
+            logger.warning(f"無法終止 thread {process['Id']}: {e}")
       
     finally:
       cursor.close()

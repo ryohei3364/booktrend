@@ -6,9 +6,11 @@ from .database import db_pool
 from .router.country_card import card_router
 from .router.search import search_router
 from .router.ranking import ranking_router
+from .router.language import language_router
 import os
 
 app=FastAPI()
+app.include_router(language_router)
 app.include_router(card_router)
 app.include_router(search_router)
 app.include_router(ranking_router)

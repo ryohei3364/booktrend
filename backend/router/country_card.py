@@ -1,18 +1,20 @@
 from fastapi import *
 from fastapi.responses import JSONResponse
 import json, random, asyncio
+from typing import List
 from ..model.country_card import generate_category, generate_wordcloud_data, generate_same_book, generate_author, generate_yearly, generate_daily
 
-card_router = APIRouter()
+card_router = APIRouter(prefix="/api/card", tags=["card"])
+    
+# @card_router.get("")
+# async def get_cards():
+    
+#     with open('frontend/static/data/countryCard/countryCard.json', encoding="utf-8") as f:
+#         data = json.load(f)
+#     return JSONResponse(content=data)
 
-@card_router.get("/api/card")
-async def get_cards():
-    with open("backend/data/countryCard.json", encoding="utf-8") as f:
-        data = json.load(f)
-    return JSONResponse(content=data)
 
-
-@card_router.get("/api/card/category/{bookstore_id}")
+@card_router.get("/category/{bookstore_id}")
 async def get_cards_category(bookstore_id: int):
     raw_data = generate_category(bookstore_id)
     # 只取前 10 筆類別
@@ -36,23 +38,23 @@ async def get_cards_category(bookstore_id: int):
     return chart_data 
 
 
-@card_router.get("/api/card/samebook/{bookstore_id}")
+@card_router.get("/samebook/{bookstore_id}")
 async def get_samebook(bookstore_id: int):
     return generate_same_book(bookstore_id)
 
-@card_router.get("/api/card/author/{bookstore_id}")
+@card_router.get("/author/{bookstore_id}")
 async def get_author(bookstore_id: int):
     return generate_author(bookstore_id)
 
-@card_router.get("/api/card/yearly/{bookstore_id}")
+@card_router.get("/yearly/{bookstore_id}")
 async def get_yearly(bookstore_id: int):
     return generate_yearly(bookstore_id)
 
-@card_router.get("/api/card/daily/{bookstore_id}")
+@card_router.get("/daily/{bookstore_id}")
 async def get_daily(bookstore_id: int):
     return generate_daily(bookstore_id)
 
-@card_router.get("/api/card/wordcloud/{bookstore_id}")
+@card_router.get("/wordcloud/{bookstore_id}")
 async def wordcloud(bookstore_id: int):
     data = await asyncio.to_thread(generate_wordcloud_data, bookstore_id)
     return [{"text": word, "size": freq} for word, freq in data]    

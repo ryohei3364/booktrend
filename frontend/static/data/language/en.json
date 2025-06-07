@@ -1,0 +1,126 @@
+[ 
+  {
+    "search": "Search",
+    "ranking": "Ranking"
+  },
+  {
+    "id": 1,
+    "country": "Germany",
+    "code": "germany",
+    "logo": "static/images/thalia_logo.png",
+    "map": "static/images/germany.png",
+    "bookstore_id": 2,
+    "sections": [
+      {
+        "class": "category",
+        "title": "Popular Categories",
+        "content": "Show popular categories"
+      },
+      {
+        "class": "samebook",
+        "title": "Best-selling list in many countries",
+        "content": "Shown in the best-selling list of many countries"
+      },
+      {
+        "class": "author",
+        "title": "Best-selling author",
+        "content": "Show best-selling authors"
+      },
+      {
+        "class": "yearly",
+        "title": "Top three bestsellers of the year",
+        "content": "Show the top three bestsellers of the year"
+      },
+      {
+        "class": "daily",
+        "title": "Top three instant bestsellers",
+        "content": "Show the top three instant bestsellers"
+      },
+      {
+        "class": "wordcloud",
+        "title": "Keyword text cloud",
+        "content": "static/images/wordcloud_de.png"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "country": "Taiwan",
+    "code": "taiwan",
+    "logo": "static/images/books_logo.png",
+    "map": "static/images/taiwan.png",
+    "bookstore_id": 1,
+    "sections": [
+      {
+        "class": "category",
+        "title": "Popular Categories",
+        "content": "Show popular categories"
+      },
+      {
+        "class": "samebook",
+        "title": "Best-selling list in many countries",
+        "content": "Shown in the best-selling list of many countries"
+      },
+      {
+        "class": "author",
+        "title": "Best-selling author",
+        "content": "Show best-selling authors"
+      },
+      {
+        "class": "yearly",
+        "title": "Top three bestsellers of the year",
+        "content": "Show the top three bestsellers of the year"
+      },
+      {
+        "class": "daily",
+        "title": "Top three instant bestsellers",
+        "content": "Show the top three instant bestsellers"
+      },
+      {
+        "class": "wordcloud",
+        "title": "Keyword text cloud",
+        "content": "static/images/wordcloud_tw.png"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "country": "Italy",
+    "code": "Italy",
+    "logo": "static/images/LaFeltrinelli_logo.png",
+    "map": "static/images/italy.png",
+    "bookstore_id": 3,
+    "sections": [
+      {
+        "class": "samebook",
+        "title": "Best-selling list in many countries",
+        "content": "Shown in the best-selling list of many countries"
+      },
+      {
+        "class": "samebook",
+        "title": "Best-selling list in many countries",
+        "content": "Shown in the best-selling list of many countries"
+      },
+      {
+        "class": "author",
+        "title": "Best-selling author",
+        "content": "Show best-selling authors"
+      },
+      {
+        "class": "yearly",
+        "title": "Top three bestsellers of the year",
+        "content": "Show the top three bestsellers of the year"
+      },
+      {
+        "class": "daily",
+        "title": "Top three instant bestsellers",
+        "content": "Show the top three instant bestsellers"
+      },
+      {
+        "class": "wordcloud",
+        "title": "Keyword text cloud",
+        "content": "static/images/wordcloud_de.png"
+      }
+    ]
+  }
+]

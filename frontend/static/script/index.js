@@ -1,6 +1,104 @@
+const navContainer = document.querySelector(".menu__navbar--container");
+
+async function renderNav() {
+  const {langContent, restContent} = await loadLanguage();
+  // 使用 langContent 來產生導覽列
+  const navBar = createNavBar(langContent);
+  navContainer.appendChild(navBar);
+}
+
+function createNavBar(data) {
+  const NavBar = document.createElement("div");
+  NavBar.className = "menu__item--header";
+
+  // 定義路徑與對應的 key
+  const links = [
+    { href: "/search", key: "search" },
+    { href: "/ranking", key: "ranking" }
+  ];
+
+  // 根據語言資料產生 <a> 標籤
+  links.forEach(link => {
+    const aTag = document.createElement("a");
+    aTag.href = link.href;
+    aTag.className = "menu__item--header--a";
+    aTag.textContent = data[link.key];
+    // console.log(`link.key:${link.key}, data-search: ${data['search']}`)
+    NavBar.appendChild(aTag);
+  });
+  return NavBar;
+}
+
+async function loadLanguage() {
+  const userLanguages = navigator.languages.join(',');
+  try {
+    const response = await fetch('/api/language', {
+      headers: {
+        "Accept-Language": userLanguages
+      }
+    });
+    const result = await response.json();
+    console.log("語言 API 回傳資料:", result);
+    // 第一個元素是語言對應表
+    const langContent = result.content[0];
+    const restContent = result.content.slice(1);
+    return { langContent, restContent };
+  } catch (error) {
+    console.error("載入語言檔失敗:", error);
+  }
+}
+
 let sectionRenderQueue = [];
-// 抓取"/api/card"的資料，render到趨勢卡片
-const container = document.querySelector(".main__card--container");
+
+const cardContainer = document.querySelector(".main__card--container");
+
+async function renderCard() {
+  const { restContent } = await loadLanguage();
+  const filteredList = restContent.filter(data => data.id !== 3);
+
+  const fragment = document.createDocumentFragment();
+  filteredList.forEach(data => {
+    const card = createCountryCard(data);
+    fragment.appendChild(card);
+  });
+  cardContainer.appendChild(fragment);
+
+  // ⬇️ 根據 section 類型批次渲染內容
+  const renderOrder = ["category", "samebook", "author", "yearly", "daily", "wordcloud"];
+  for (const sectionType of renderOrder) {
+    const sectionsToRender = sectionRenderQueue.filter(s => s.className === sectionType);
+    for (const { bookstoreId, contentContainer } of sectionsToRender) {
+      switch (sectionType) {
+        case "category":
+          const canvas1 = document.createElement("canvas");
+          canvas1.width = 300;
+          canvas1.height = 450;
+          contentContainer.appendChild(canvas1);
+          await createCategory(bookstoreId, canvas1);
+          break;
+        case "samebook":
+          await createSameBooks(bookstoreId, contentContainer);
+          break;
+        case "author":
+          const canvas2 = document.createElement("canvas");
+          contentContainer.appendChild(canvas2);
+          await createAuthor(bookstoreId, canvas2);
+          break;
+        case "yearly":
+          await createRanking(bookstoreId, contentContainer, fetchYearlyData);
+          // await createYearly(bookstoreId, contentContainer);
+          break;
+        case "daily":
+          await createRanking(bookstoreId, contentContainer, fetchDailyData);
+          // await createDaily(bookstoreId, contentContainer);
+          break;
+        case "wordcloud":
+          await createWordCloud(bookstoreId, contentContainer);
+          break;
+      }
+    }
+  }
+}
 
 function createCountryCard(data) {
   const card = document.createElement("div");
@@ -63,58 +161,21 @@ function createCountryCard(data) {
   return card;
 }
 
-async function renderCard() {
-  const dataList = await fetchCardData();
-  const filteredList = dataList.filter(data => data.id !== 3);
+// async function sendUserLanguage() {
+//   const userLanguages = navigator.languages.join(',');
+//   const response = await fetch('/api/language', {
+//     headers: {
+//       "Accept-Language": userLanguages
+//     }
+//   });
+//   const data = await response.json();
+//   console.log("後端收到的語言偏好:", data);
+// }
 
-  const fragment = document.createDocumentFragment();
-  filteredList.forEach(data => {
-    const card = createCountryCard(data);
-    fragment.appendChild(card);
-  });
-  container.appendChild(fragment);
-
-  // ⬇️ 根據 section 類型批次渲染內容
-  const renderOrder = ["category", "samebook", "author", "yearly", "daily", "wordcloud"];
-  for (const sectionType of renderOrder) {
-    const sectionsToRender = sectionRenderQueue.filter(s => s.className === sectionType);
-    for (const { bookstoreId, contentContainer } of sectionsToRender) {
-      switch (sectionType) {
-        case "category":
-          const canvas1 = document.createElement("canvas");
-          canvas1.width = 300;
-          canvas1.height = 450;
-          contentContainer.appendChild(canvas1);
-          await createCategory(bookstoreId, canvas1);
-          break;
-        case "samebook":
-          await createSameBooks(bookstoreId, contentContainer);
-          break;
-        case "author":
-          const canvas2 = document.createElement("canvas");
-          contentContainer.appendChild(canvas2);
-          await createAuthor(bookstoreId, canvas2);
-          break;
-        case "yearly":
-          await createRanking(bookstoreId, contentContainer, fetchYearlyData);
-          // await createYearly(bookstoreId, contentContainer);
-          break;
-        case "daily":
-          await createRanking(bookstoreId, contentContainer, fetchDailyData);
-          // await createDaily(bookstoreId, contentContainer);
-          break;
-        case "wordcloud":
-          await createWordCloud(bookstoreId, contentContainer);
-          break;
-      }
-    }
-  }
-}
-
-async function fetchCardData() {
-  const response = await fetch("/api/card");
-  return response.json();
-}
+// async function fetchCardData() {
+//   const response = await fetch("/api/language");
+//   return response.json();
+// }
 
 async function fetchCategoryData(bookstoreId) {
   const response = await fetch(`/api/card/category/${bookstoreId}`);
@@ -153,7 +214,7 @@ async function createCategory(bookstoreId, canvas) {
 
 async function createSameBooks(bookstoreId, container) {
   const sameBooks = await fetchSameBooksData(bookstoreId);
-  console.log("sameBooks", sameBooks);
+
   sameBooks.forEach(book => {
     const bookCard = document.createElement("div");
     bookCard.className = "book-card";
@@ -368,5 +429,5 @@ function createChart(canvas, chartData, defaultType = "doughnut") {
 
   new Chart(ctx, config);
 }
-
+renderNav();
 renderCard();
