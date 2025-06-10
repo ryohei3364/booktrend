@@ -30,6 +30,7 @@ html, body {
   height: 100%; /*外層高度100%*/
   margin: 0;
   padding: 0;
+  overflow-y: scroll;
 }
 body {
 	display: flex;
@@ -91,6 +92,7 @@ a {
 	font-weight: 400;
   margin-right: 20px;
 }
+
 .menu__item--container--right {
   display: flex;
   align-items: center;

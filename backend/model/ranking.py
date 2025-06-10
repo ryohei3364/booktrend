@@ -6,7 +6,7 @@ from fastapi import *
 
 def get_ranking_data(bookstore_id: int, chart_type: str):
     query = """
-		SELECT r.id, b.title, b.image_url_s, 
+		SELECT r.id, b.title, b.image_url, 
 			CASE 
 				WHEN b.bookstore_id = 1 THEN a.name
 				WHEN b.bookstore_id = 2 THEN a.name

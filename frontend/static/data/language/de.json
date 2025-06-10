@@ -1,6 +1,18 @@
 [
   {
     "search": "Suche",
+    "search_list": [
+      {
+        "search_title": "Beliebte Suchanfragen",
+        "search_placeholder": "Suche nach Büchern, Autoren oder Genres",
+        "topic1": "小說",
+        "topic2": "商業理財",
+        "topic3": "心理勵志",
+        "topic4": "如果歷史是一隻喵",
+        "topic5": "Most Read",
+        "topic6": "Latest Additions"
+      }
+    ],
     "ranking": "Ranking"
   },
   {

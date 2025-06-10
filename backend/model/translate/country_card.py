@@ -11,7 +11,7 @@ import json, asyncio
 translator = Translator()
 
 async def translate_country_card(lang):
-    with open('frontend/static/data/language/zh.json', encoding="utf-8") as f:
+    with open('frontend/static/data/language/en.json', encoding="utf-8") as f:
       data = json.load(f)
     
     # 翻譯每個值（假設值都是字串）
@@ -38,7 +38,7 @@ async def translate_country_card(lang):
 
 # 在頂層使用 asyncio.run 呼叫非同步函式
 if __name__ == "__main__":
-    asyncio.run(translate_country_card("de"))
+    asyncio.run(translate_country_card("fr"))
       
 
 #     for row in authors:

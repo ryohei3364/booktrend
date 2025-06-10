@@ -1,7 +1,19 @@
-[ 
+[
   {
-    "ranking": "排行榜",
-    "search": "搜尋"
+    "search": "搜尋",
+    "search_list": [
+      {
+        "search_title": "熱門搜尋",
+        "search_placeholder": "搜尋書籍、作者或類型",
+        "topic1": "小說",
+        "topic2": "商業理財",
+        "topic3": "心理勵志",
+        "topic4": "如果歷史是一隻喵",
+        "topic5": "最多閱讀",
+        "topic6": "最新加入"
+      }
+    ],
+    "ranking": "排行榜"
   },
   {
     "id": 1,

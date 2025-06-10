@@ -61,26 +61,34 @@ def generate_wordcloud_data(bookstore_id: int):
 
 
 def generate_category(bookstore_id: int):
+    # query = """
+    # SELECT
+    #   COALESCE(p.id, c.id) AS parent_category_id,
+    #   COALESCE(p.name, c.name) AS parent_category_name,
+    #   COUNT(DISTINCT bc.book_id) AS total_books
+    # FROM book_categories bc
+    # JOIN categories c ON bc.category_id = c.id
+    # LEFT JOIN categories p ON c.parent_id = p.id
+    # WHERE COALESCE(p.parent_id, c.parent_id) IS NULL
+    #   AND (p.bookstore_id = %s OR c.bookstore_id = %s)
+    # GROUP BY parent_category_id, parent_category_name
+    # ORDER BY total_books DESC;
+    # """
     query = """
-    SELECT
-      COALESCE(p.id, c.id) AS parent_category_id,
-      COALESCE(p.name, c.name) AS parent_category_name,
-      COUNT(DISTINCT bc.book_id) AS total_books
-    FROM book_categories bc
+    SELECT bc.category_id, c.name AS category_name, COUNT(bc.book_id) AS book_count
+    FROM book_categories bc 
     JOIN categories c ON bc.category_id = c.id
-    LEFT JOIN categories p ON c.parent_id = p.id
-    WHERE COALESCE(p.parent_id, c.parent_id) IS NULL
-      AND (p.bookstore_id = %s OR c.bookstore_id = %s)
-    GROUP BY parent_category_id, parent_category_name
-    ORDER BY total_books DESC;
-    """
-    # print(db_pool.get_cursor(query, (bookstore_id, bookstore_id), fetch=True))
-    return db_pool.get_cursor(query, (bookstore_id, bookstore_id), fetch=True)
+    WHERE c.bookstore_id = %s 
+    GROUP BY bc.category_id, c.name
+    ORDER BY book_count DESC;
+    """    
+    # print(db_pool.get_cursor(query, (bookstore_id,), fetch=True))
+    return db_pool.get_cursor(query, (bookstore_id,), fetch=True)
 
 
 def generate_same_book(bookstore_id: int):
     query = """
-    SELECT books.title, books.image_url_s, authors.name
+    SELECT books.title, books.image_url, authors.name
     FROM books
     INNER JOIN authors ON books.author_id = authors.id
     WHERE books.group_id IS NOT NULL AND books.bookstore_id = %s
@@ -113,7 +121,7 @@ def generate_yearly(bookstore_id: int):
       r.ranking,
       b.title,
       a.name,
-      b.image_url_s
+      b.image_url
     FROM rankings r
     JOIN books b ON r.book_id = b.id
     JOIN authors a ON b.author_id = a.id
@@ -132,7 +140,7 @@ def generate_daily(bookstore_id: int):
       r.ranking,
       b.title,
       a.name,
-      b.image_url_s
+      b.image_url
     FROM rankings r
     JOIN books b ON r.book_id = b.id
     JOIN authors a ON b.author_id = a.id

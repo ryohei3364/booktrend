@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+  {% block link %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', path='./style/ranking.css') }}"/>
+  {% endblock %}
+
+  {% block script %}
+  <script type="module" src="{{ url_for('static', path='./script/navbar.js') }}" defer></script>
+  <script type="module" src="{{ url_for('static', path='./script/ranking.js') }}" defer></script>
+  {% endblock %}
+
+  {% block main %}
+    <div class="ranking__container">
+			<div id="title"></div>
+			<div class="ranking__container--card"></div>
+    </div>
+  {% endblock %}

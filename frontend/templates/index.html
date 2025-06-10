@@ -5,12 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BookTrend 全球書籍儀表板</title>
   <link rel="icon" href="./static/images/favicon.png" type="image/png">
-  <link rel="stylesheet" type="text/css" href="./static/style/core.css"/>
-  <link rel="stylesheet" type="text/css" href="./static/style/index.css"/>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', path='./style/core.css') }}"/>
+  {% block link %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', path='./style/index.css') }}"/>
+  {% endblock %}
+
+  {% block script %}
+  <script type="module" src="{{ url_for('static', path='./script/navbar.js') }}" defer></script>
   <script async src="https://d3js.org/d3.v7.min.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/d3-cloud/build/d3.layout.cloud.min.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script async src="./static/script/index.js"></script>
+  <script type="module" src="{{ url_for('static', path='./script/index.js') }}" defer></script>
+  <!-- <script async src="./static/script/index.js"></script> -->
+
+  {% endblock %}
 </head>
 <body>
 	<nav class="menu">
@@ -21,11 +29,12 @@
         </a>
         <div class="menu__item--text">
           <a class="menu__item--text--EN" href="/">BookTrend</a>
-          <div class="menu__navbar--container"></div>
-          <!-- <div class="menu__item--header">
-            <a href="/search" class="menu__item--header--a">搜尋</a>
-            <a href="/ranking" class="menu__item--header--a">排行榜</a>
-          </div> -->
+          <div class="menu__navbar--container">
+            <div class="menu__item--header">
+              <a href="/search" class="menu__item--header--a" id="searchNav">Search</a>
+              <a href="/ranking" class="menu__item--header--a" id="rankingNav">Ranking</a>
+            </div>
+          </div>
         </div>
       </div>
       <div class="menu__item--container--right">
@@ -33,13 +42,12 @@
           <input type="search" class="form-control" placeholder="搜尋關鍵字" aria-label="Search"> 
         </form> -->
         <div class="menu__item--language" id="langSwitcher">
-          <a href="#" class="menu__item--language--toggle">TW</a>
-          <ul class="menu__item--language--dropdown">
-            <li><a href="#">繁體中文</a></li>
-            <li><a href="#">English</a></li>
-            <li><a href="#">Deutsch</a></li>
-            <li><a href="#">Français</a></li>
-          </ul>
+          <select id="language-select">
+            <option value="zh">繁體中文</option>
+            <option value="en">English</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+          </select>
         </div>
         <div class="menu__item--member">
           <a href="#" class="menu__item--member--user">
@@ -48,12 +56,14 @@
       </div>
     </nav>
 	</nav>
-  <section>
+  <!-- <section>
     <div class="slogan">書，照見一個國家的深層樣貌。</div>
     <div class="background"></div>
-  </section>
+  </section> -->
   <main>
+  {% block main %}
     <div class="main__card--container"></div>
+  {% endblock %}
   </main>
   <footer>
     <div class="footer__container">COPYRIGHT © 2025 BookTrend</div>

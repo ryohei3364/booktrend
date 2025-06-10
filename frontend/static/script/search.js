@@ -1,9 +1,23 @@
-// const lang = navigator.language.slice(0, 2);
-const lang = "zh"; // 👉 你可以在這裡強制指定測試語系
-// const supportedLangs = ["en", "fr", "de", "it", "zh"];
-// const selectedLang = supportedLangs.includes(lang) ? lang : "zh";
+console.log("✅ search.js loaded");
 
-renderSearch(lang);
+import { initNavbar } from './navbar.js';
+await initNavbar();  // 等待 navbar 完成後再繼續執行
+
+import { loadLang } from './language.js';
+
+const { langContent } = await loadLang();
+console.log(langContent);
+
+// async function initPage() {
+//   // await getUserCookie();
+//   const { langContent } = await loadLang();
+//   console.log(langContent);
+// }
+// initPage();
+
+let cachedLang = null;
+renderSearch();
+
 
 document.getElementById("searchInput").addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
@@ -14,29 +28,35 @@ document.getElementById("searchInput").addEventListener("keydown", (e) => {
   }
 });
 
-function renderSearch(lang) {
-  fetch(`/api/search/${lang}`)
+function renderSearch() {
+  if (cachedLang) {
+    updateDOMWithLang(cachedLang);
+    return;
+  }
+
+  fetch('/api/language')
     .then((res) => res.json())
     .then((i18n) => {
-      // ✅ 這裡可以安全使用 i18n
-      // console.log("全部資料：", lang);
-      // console.log("載入的 i18n 內容：", i18n);
-
-      // ✅ 設定到 DOM
-      document.getElementById("title").textContent = i18n.search_title;
-      document.getElementById("searchInput").placeholder =
-        i18n.search_placeholder;
-      // 自動設定 topic1 ~ topic6
-      for (let i = 1; i <= 6; i++) {
-        const el = document.getElementById(`topic${i}`);
-        if (el && i18n[`topic${i}`]) {
-          el.textContent = i18n[`topic${i}`];
-        }
-      }
+      console.log(i18n.content[0].search_list);
+      const langData = i18n.content[0].search_list[0];  // ✅ 只取需要的部分
+      console.log("載入的語系內容：", langData);
+      cachedLang = langData;
+      updateDOMWithLang(langData);
     })
     .catch((err) => {
       console.error("載入語系 JSON 發生錯誤：", err);
     });
+}
+
+function updateDOMWithLang(data) {
+  document.getElementById("title").textContent = data.search_title;
+  document.getElementById("searchInput").placeholder = data.search_placeholder;
+  for (let i = 1; i <= 6; i++) {
+    const el = document.getElementById(`topic${i}`);
+    if (el && data[`topic${i}`]) {
+      el.textContent = data[`topic${i}`];
+    }
+  }
 }
 
 function searchBooks(keyword) {

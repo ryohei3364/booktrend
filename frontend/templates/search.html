@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+
+  {% block link %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', path='./style/search.css') }}"/>
+  {% endblock %}
+
+  {% block script %}
+  <script type="module" src="{{ url_for('static', path='./script/navbar.js') }}" defer></script>
+  <!-- <script defer src="./static/script/search.js"></script> -->
+  <!-- <script type="module" src="./static/script/search.js"></script> -->
+  <script type="module" src="{{ url_for('static', path='./script/search.js') }}" defer></script>
+
+  {% endblock %}
+
+  {% block main %}
+    <div class="search__container">
+      <div class="search__container--search__bar">
+        <div class="search__container--inner">
+          <span class="SVG__search--icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="m17.854 18.146-3.128-3.128c.795-.954 1.275-2.18 1.275-3.519 0-3.038-2.462-5.5-5.5-5.5s-5.5 2.462-5.5 5.5 2.462 5.5 5.5 5.5c1.339 0 2.565-.479 3.518-1.274l3.128 3.128c.098.098.226.147.354.147s.256-.049.354-.146c.195-.196.195-.512-.001-.708zm-7.353-2.146c-2.481 0-4.5-2.019-4.5-4.5s2.018-4.5 4.5-4.5 4.5 2.019 4.5 4.5-2.019 4.5-4.5 4.5z"></path>
+            </svg>
+          </span>
+          <input type="text" class="SVG__search--input" id="searchInput"/>
+        </div>
+      </div>
+      <div class="search__container--search__list" id="searchList">
+        <div id="title"></div>
+        <div class="list">
+          <ul class="search__topic">
+            <li class="search__topic--item" id="topic1"></li>
+            <li class="search__topic--item" id="topic2"></li>
+            <li class="search__topic--item" id="topic3"></li>
+            <li class="search__topic--item" id="topic4"></li>
+            <li class="search__topic--item" id="topic5"></li>
+            <li class="search__topic--item" id="topic6"></li>
+          </ul>
+        </div>
+      </div>
+      <div class="search__results" id="searchResults"></div>
+    </div>
+  {% endblock %}

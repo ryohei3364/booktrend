@@ -1,3 +1,19 @@
+console.log("✅ ranking.js loaded");
+
+import { initNavbar } from './navbar.js';
+
+await initNavbar();  // 等待 navbar 完成後再繼續執行
+
+// async function initPage() {
+//   // await getUserCookie();
+//   const { langContent } = await loadLang();
+//   console.log('langContent');
+//   console.log(langContent);
+//   renderNav(langContent);
+// }
+
+// initPage();
+
 async function fetchRankingData(bookstoreId, chartType) {
   const response = await fetch(`/api/ranking?bookstore_id=${bookstoreId}&chart_type=${chartType}`);
   return response.json();
@@ -18,7 +34,7 @@ async function renderRanking(bookstoreId, chartType) {
     author.textContent = item.author;
 
     const image = document.createElement("img");
-    image.src = item.image_url_s;
+    image.src = item.image_url;
     image.alt = item.title;
 
     bookBlock.appendChild(image);

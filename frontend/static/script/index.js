@@ -1,64 +1,27 @@
-const navContainer = document.querySelector(".menu__navbar--container");
+import { initNavbar } from './navbar.js';
+await initNavbar();  // 等待 navbar 完成後再繼續執行
 
-async function renderNav() {
-  const {langContent, restContent} = await loadLanguage();
-  // 使用 langContent 來產生導覽列
-  const navBar = createNavBar(langContent);
-  navContainer.appendChild(navBar);
-}
+import { loadLang, switchLang } from './language.js';
+switchLang();  // 綁定語言選單
 
-function createNavBar(data) {
-  const NavBar = document.createElement("div");
-  NavBar.className = "menu__item--header";
-
-  // 定義路徑與對應的 key
-  const links = [
-    { href: "/search", key: "search" },
-    { href: "/ranking", key: "ranking" }
-  ];
-
-  // 根據語言資料產生 <a> 標籤
-  links.forEach(link => {
-    const aTag = document.createElement("a");
-    aTag.href = link.href;
-    aTag.className = "menu__item--header--a";
-    aTag.textContent = data[link.key];
-    // console.log(`link.key:${link.key}, data-search: ${data['search']}`)
-    NavBar.appendChild(aTag);
-  });
-  return NavBar;
-}
-
-async function loadLanguage() {
-  const userLanguages = navigator.languages.join(',');
-  try {
-    const response = await fetch('/api/language', {
-      headers: {
-        "Accept-Language": userLanguages
-      }
-    });
-    const result = await response.json();
-    console.log("語言 API 回傳資料:", result);
-    // 第一個元素是語言對應表
-    const langContent = result.content[0];
-    const restContent = result.content.slice(1);
-    return { langContent, restContent };
-  } catch (error) {
-    console.error("載入語言檔失敗:", error);
-  }
+async function initPage() {
+  // await getUserCookie();
+  const { countryList } = await loadLang();
+  // renderNav(langContent);
+  renderCard(countryList);
 }
 
 let sectionRenderQueue = [];
-
 const cardContainer = document.querySelector(".main__card--container");
 
-async function renderCard() {
-  const { restContent } = await loadLanguage();
-  const filteredList = restContent.filter(data => data.id !== 3);
+async function renderCard(data) {
+  const filteredList = data.filter(data => data.id !== 3);
+  console.log('filteredList');
+  console.log(filteredList);
 
   const fragment = document.createDocumentFragment();
-  filteredList.forEach(data => {
-    const card = createCountryCard(data);
+  filteredList.forEach(country => {
+    const card = createCountryCard(country);
     fragment.appendChild(card);
   });
   cardContainer.appendChild(fragment);
@@ -99,6 +62,7 @@ async function renderCard() {
     }
   }
 }
+
 
 function createCountryCard(data) {
   const card = document.createElement("div");
@@ -223,7 +187,7 @@ async function createSameBooks(bookstoreId, container) {
     author.textContent = book.name;
 
     const img = document.createElement("img");
-    img.src = book.image_url_s;
+    img.src = book.image_url;
     img.alt = book.title;
 
     const title = document.createElement("p");
@@ -271,7 +235,7 @@ async function createRanking(bookstoreId, container, fetchFn) {
     author.textContent = book.author_name;
 
     const img = document.createElement("img");
-    img.src = book.image_url_s;
+    img.src = book.image_url;
     img.alt = book.title;
 
     const title = document.createElement("p");
@@ -370,6 +334,8 @@ function createSvgIcon(type) {
 	return svgMap;
 }
 
+
+
 function setupToggle(sectionDiv, header, content) {
   // 預設為展開
   let isOpen = true;
@@ -403,7 +369,17 @@ function setupToggle(sectionDiv, header, content) {
 }
 
 function createChart(canvas, chartData, defaultType = "doughnut") {
+  // tooltip 會因為沒有重畫被擋住，加了就OK了
+  // ✅ 確保同一個 canvas 不會被畫第二次
+  const existingChart = Chart.getChart(canvas);
+  if (existingChart) {
+    existingChart.destroy(); // 清除前一個圖表
+  }
   const ctx = canvas.getContext("2d");
+
+  // 從 chartData 取出翻譯對應表（如果有）
+  const translations = chartData.translations || {};
+  console.log(translations);
 
   // 判斷是否為完整的 Chart.js 設定（含 type 和 options）
   const config = chartData.type
@@ -421,7 +397,19 @@ function createChart(canvas, chartData, defaultType = "doughnut") {
               position: "bottom"
             },
             tooltip: {
-              enabled: true
+              enabled: true,
+              callbacks: {
+                label: function (tooltipItem) {
+                  const dataIndex = tooltipItem.dataIndex;
+                  const datasetIndex = tooltipItem.datasetIndex;
+
+                  const originalLabel = chartData.labels[dataIndex];
+                  const translatedLabel = translations[originalLabel] || originalLabel;
+                  const value = chartData.datasets[datasetIndex].data[dataIndex];
+
+                  return `${translatedLabel}: ${value}`;
+                }
+              }
             }
           }
         }
@@ -429,5 +417,4 @@ function createChart(canvas, chartData, defaultType = "doughnut") {
 
   new Chart(ctx, config);
 }
-renderNav();
-renderCard();
+initPage();
