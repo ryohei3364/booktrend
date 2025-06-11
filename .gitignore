@@ -139,4 +139,5 @@ dmypy.json
 cython_debug/
 
 # macOS
-.DS_Store
+.DS_Storenginx/ssl/*.key
+nginx/ssl/*.crt
