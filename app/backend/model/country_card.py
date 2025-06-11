@@ -1,7 +1,7 @@
 from ..database import db_pool
 # from database import db_pool
 from fastapi import *
-import spacy, json
+import json
 from collections import Counter
 
 # backend % python -m model.country_card
