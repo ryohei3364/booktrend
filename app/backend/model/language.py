@@ -1,4 +1,3 @@
-from ..database import db_pool
 from fastapi.responses import JSONResponse
 from fastapi import *
 import os, json

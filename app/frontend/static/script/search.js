@@ -1,4 +1,4 @@
-console.log("✅ search.js loaded");
+// console.log("✅ search.js loaded");
 
 import { initNavbar } from './navbar.js';
 await initNavbar();  // 等待 navbar 完成後再繼續執行

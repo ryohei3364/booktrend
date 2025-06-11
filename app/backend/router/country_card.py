@@ -1,7 +1,5 @@
 from fastapi import *
-from fastapi.responses import JSONResponse
-import json, random, asyncio
-from typing import List
+import random
 from ..model.country_card import generate_category, generate_wordcloud, generate_same_book, generate_author, generate_yearly, generate_daily
 
 card_router = APIRouter(prefix="/api/card", tags=["card"])

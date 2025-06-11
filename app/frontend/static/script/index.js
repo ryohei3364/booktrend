@@ -16,8 +16,6 @@ const cardContainer = document.querySelector(".main__card--container");
 
 async function renderCard(data) {
   const filteredList = data.filter(data => data.id !== 3);
-  console.log('filteredList');
-  console.log(filteredList);
 
   const fragment = document.createDocumentFragment();
   filteredList.forEach(country => {

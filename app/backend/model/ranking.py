@@ -1,6 +1,6 @@
 from ..database import db_pool
-from fastapi import *
 # from database import db_pool
+from fastapi import *
 
 # backend % python -m model.ranking
 

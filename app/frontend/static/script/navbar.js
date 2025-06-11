@@ -1,4 +1,4 @@
-console.log("啟動navbar.js");
+// console.log("啟動navbar.js");
 
 import { loadLang } from './language.js';
 

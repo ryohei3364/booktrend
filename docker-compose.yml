@@ -1,23 +1,13 @@
 services:
-  frontend:
+  booktrend-app:
     build:
-      context: ./frontend
+      context: ./app
       dockerfile: Dockerfile
-    container_name: booktrend-frontend
-    ports:
-      - "8080:80"   # 對外暴露 8080 端口，容器內 nginx 用 80
-    networks:
-      - backend
-
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: booktrend-backend
+    container_name: booktrend-app
     ports:
       - "3000:3000"
     env_file:
-      - ./backend/.env
+      - ./app/backend/.env
     restart: on-failure
     networks:
       - backend
@@ -35,8 +25,7 @@ services:
       - ./nginx/ssl/certificate.crt:/etc/nginx/ssl/certificate.crt:ro
       - ./nginx/ssl/private.key:/etc/nginx/ssl/private.key:ro
     depends_on:
-      - frontend
-      - backend
+      - booktrend-app
     networks:
       - backend
 

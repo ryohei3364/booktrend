@@ -3,3 +3,4 @@ FROM nginx:alpine
 
 # 複製自訂的 default.conf 到容器內的正確位置
 COPY default.conf /etc/nginx/conf.d/default.conf
+COPY ssl /etc/nginx/ssl
