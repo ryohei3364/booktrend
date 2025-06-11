@@ -1,6 +1,7 @@
 from ..database import db_pool
+# from database import db_pool
 from fastapi import *
-import spacy
+import spacy, json
 from collections import Counter
 
 # backend % python -m model.country_card
@@ -29,7 +30,7 @@ def get_language_model(bookstore_id: int):
     raise ValueError(f"Unsupported bookstore_id: {bookstore_id}")
       
       
-def generate_wordcloud_data(bookstore_id: int):
+def insert_wordcloud_data(bookstore_id: int):
   nlp = get_language_model(bookstore_id)
   data = get_description(bookstore_id)
   stopwords = {
@@ -53,12 +54,23 @@ def generate_wordcloud_data(bookstore_id: int):
     for token in doc:
       if token.pos_ == 'NOUN' and len(token.text) > 1 and token.text not in stopwords:
         noun_counter[token.text] += 1
+  data = noun_counter.most_common(30)
+  json_data = json.dumps(data, ensure_ascii=False)
+  # print(json_data)
+  query = """
+  UPDATE bookstores SET wordcloud_json = %s WHERE id = %s
+  """    
+  db_pool.insert_cursor(query, (json_data, bookstore_id))
 
-  most_common = noun_counter.most_common(30)
-  # for word, freq in most_common:
-  #   print(f"{word}: {freq}")
-  return most_common
 
+def generate_wordcloud(bookstore_id: int):
+  query = "SELECT wordcloud_json FROM bookstores WHERE id = %s"    
+  result = db_pool.get_cursor(query, (bookstore_id,), fetch=True)
+  if not result or not result[0].get("wordcloud_json"):
+    return []
+  wordcloud_json = json.loads(result[0]["wordcloud_json"])
+  return [{"text": word, "size": freq} for word, freq in wordcloud_json]
+  
 
 def generate_category(bookstore_id: int):
     # query = """
@@ -97,7 +109,7 @@ def generate_same_book(bookstore_id: int):
   
 
 def generate_author(bookstore_id: int):
-    query = f"""
+    query = """
     SELECT 
         a.id AS author_id,
         a.name AS author_name,
@@ -151,3 +163,10 @@ def generate_daily(bookstore_id: int):
     """
     # print(db_pool.get_cursor(query, (bookstore_id,), fetch=True))
     return db_pool.get_cursor(query, (bookstore_id,), fetch=True)
+  
+  
+  
+# if __name__ == "__main__":
+#     print("Running wordcloud generation test...")
+#     # bookstore_id = 1  # 測試用的書店 ID（請改成實際存在的）
+#     generate_wordcloud(bookstore_id=1)

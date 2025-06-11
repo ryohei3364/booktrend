@@ -2,7 +2,7 @@ from fastapi import *
 from fastapi.responses import JSONResponse
 import json, random, asyncio
 from typing import List
-from ..model.country_card import generate_category, generate_wordcloud_data, generate_same_book, generate_author, generate_yearly, generate_daily
+from ..model.country_card import generate_category, generate_wordcloud, generate_same_book, generate_author, generate_yearly, generate_daily
 
 card_router = APIRouter(prefix="/api/card", tags=["card"])
     
@@ -71,6 +71,8 @@ async def get_daily(bookstore_id: int):
 
 @card_router.get("/wordcloud/{bookstore_id}")
 async def wordcloud(bookstore_id: int):
-    data = await asyncio.to_thread(generate_wordcloud_data, bookstore_id)
-    return [{"text": word, "size": freq} for word, freq in data]    
+    # data = await asyncio.to_thread(generate_wordcloud_data, bookstore_id)
+    # return [{"text": word, "size": freq} for word, freq in data]    
+    return generate_wordcloud(bookstore_id)
+    
 
