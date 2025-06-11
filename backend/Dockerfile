@@ -1,6 +1,6 @@
 FROM python:3.10-slim
 
-WORKDIR /app
+WORKDIR /backend
 
 # 安裝 pip 套件
 COPY requirements.txt .
