@@ -1,0 +1,17 @@
+FROM python:3.10-slim
+
+# 設定工作目錄為 /app
+WORKDIR /app
+
+# 安裝 Python 套件
+COPY backend/requirements.txt ./backend/
+RUN pip install --upgrade pip && pip install --no-cache-dir -r ./backend/requirements.txt
+
+# 複製整個 app 下的 backend 和 frontend（保持原本的資料夾位置）
+COPY backend/ ./backend/
+COPY frontend/ ./frontend/
+
+# 確保 backend 是 Python package（已加 __init__.py）
+# 啟動 FastAPI，從 backend.app:app
+CMD ["uvicorn", "backend.app:app", "--host", "0.0.0.0", "--port", "3000"]
+

@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+  {% block link %}
+  <link rel="stylesheet" type="text/css" href="https://booktrend.online/static/style/ranking.css">
+  {% endblock %}
+
+  {% block script %}
+  <script type="module" src="https://booktrend.online/static/script/navbar.js" defer></script>
+  <script type="module" src="https://booktrend.online/static/script/ranking.js" defer></script>
+  {% endblock %}
+
+  {% block main %}
+    <div class="ranking__container">
+			<div id="title"></div>
+			<div class="ranking__container--card"></div>
+    </div>
+  {% endblock %}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BookTrend 全球書籍儀表板</title>
+  <link rel="icon" href="/static/images/favicon.png" type="image/png">
+  <link rel="stylesheet" type="text/css" href="https://booktrend.online/static/style/core.css">
+  {% block link %}
+  <link rel="stylesheet" type="text/css" href="https://booktrend.online/static/style/index.css">
+  {% endblock %}
+
+  {% block script %}
+  <script type="module" src="https://booktrend.online/static/script/navbar.js" defer></script>
+  <script async src="https://d3js.org/d3.v7.min.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/d3-cloud/build/d3.layout.cloud.min.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="https://booktrend.online/static/script/index.js" defer></script>
+  <!-- <script async src="/static/script/index.js"></script> -->
+
+  {% endblock %}
+</head>
+<body>
+	<nav class="menu">
+    <nav class="menu__item">
+      <div class="menu__item--container--left">
+        <a class="menu__item--icon" href="/">
+          <img src="static/images/world-book-day.png" alt="book icon" title="book icon">
+        </a>
+        <div class="menu__item--text">
+          <a class="menu__item--text--EN" href="/">BookTrend</a>
+          <div class="menu__navbar--container">
+            <div class="menu__item--header">
+              <a href="/search" class="menu__item--header--a" id="searchNav"></a>
+              <a href="/ranking" class="menu__item--header--a" id="rankingNav"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu__item--container--right">
+        <!-- <form class="menu__item--search" role="search"> 
+          <input type="search" class="form-control" placeholder="搜尋關鍵字" aria-label="Search"> 
+        </form> -->
+        <div class="menu__item--language" id="langSwitcher">
+          <select id="language-select">
+            <option value="zh">繁體中文</option>
+            <option value="en">English</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+          </select>
+        </div>
+        <div class="menu__item--member">
+          <a href="#" class="menu__item--member--user">
+            <img src="static/images/98681.jpeg" alt="photo" class="rounded-circle";>
+          </a>
+      </div>
+    </nav>
+	</nav>
+  <!-- <section>
+    <div class="slogan">書，照見一個國家的深層樣貌。</div>
+    <div class="background"></div>
+  </section> -->
+  <main>
+  {% block main %}
+    <div class="main__card--container"></div>
+  {% endblock %}
+  </main>
+  <footer>
+    <div class="footer__container">COPYRIGHT © 2025 BookTrend</div>
+  </footer>
+</body>
+</html>

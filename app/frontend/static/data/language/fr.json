@@ -1,0 +1,136 @@
+[
+  {
+    "search": "Rechercher",
+    "search_list": [
+      {
+        "search_title": "Recherches populaires",
+        "search_placeholder": "Rechercher des livres, des auteurs ou des genres",
+        "topic1": "Roman",
+        "topic2": "Affaires et finances",
+        "topic3": "Inspiration psychologique",
+        "topic4": "Si l'histoire était un chat",
+        "topic5": "Les plus lus",
+        "topic6": "Derniers ajouts"
+      }
+    ],
+    "ranking": "Classement"
+  },
+  {
+    "id": 1,
+    "country": "Allemagne",
+    "code": "allemagne",
+    "logo": "static/images/thalia_logo.png",
+    "map": "static/images/germany.png",
+    "bookstore_id": 2,
+    "sections": [
+      {
+        "class": "category",
+        "title": "Catégories populaires",
+        "content": "Afficher les catégories populaires"
+      },
+      {
+        "class": "samebook",
+        "title": "Liste des meilleures ventes dans de nombreux pays",
+        "content": "Présent dans la liste des meilleures ventes de nombreux pays"
+      },
+      {
+        "class": "author",
+        "title": "Auteur à succès",
+        "content": "Afficher les auteurs à succès"
+      },
+      {
+        "class": "yearly",
+        "title": "Top 3 des meilleures ventes de l'année",
+        "content": "Afficher les trois meilleures ventes de l'année"
+      },
+      {
+        "class": "daily",
+        "title": "Top 3 des meilleures ventes instantanées",
+        "content": "Afficher les trois meilleures ventes instantanées"
+      },
+      {
+        "class": "wordcloud",
+        "title": "Nuage de mots-clés",
+        "content": "static/images/wordcloud_de.png"
+      }
+    ]
+  },
+{
+  "id": 2,
+  "country": "Taïwan", "code": "taïwan",
+  "logo": "static/images/books_logo.png",
+  "map": "static/images/taiwan.png",
+  "bookstore_id": 1,
+  "sections": [
+    {
+      "class": "category",
+      "title": "Catégories populaires",
+      "content": "Afficher les catégories populaires"
+    },
+    {
+      "class": "samebook",
+      "title": "Liste des meilleures ventes dans de nombreux pays",
+      "content": "Afficher dans la liste des meilleures ventes de nombreux pays"
+    },
+    {
+      "class": "author",
+      "title": "Auteur à succès",
+      "content": "Afficher les auteurs à succès"
+    },
+    {
+      "class": "yearly",
+      "title": "Top 3 des meilleures ventes de l'année",
+      "content": "Afficher les trois meilleures ventes de l'année"
+    },
+    {
+      "class": "daily",
+      "title": "Top 3 des meilleures ventes instantanées", "content": "Afficher les trois meilleures ventes instantanées"
+    },
+    {
+      "class": "wordcloud",
+      "title": "Nuage de mots-clés",
+      "content": "static/images/wordcloud_tw.png"
+    }
+  ]
+},
+{
+  "id": 3,
+  "country": "Italie",
+  "code": "Italie",
+  "logo": "static/images/LaFeltrinelli_logo.png",
+  "map": "static/images/italy.png",
+  "bookstore_id": 3,
+  "sections": [
+    {
+      "class": "samebook",
+      "title": "Liste des meilleures ventes dans de nombreux pays",
+      "content": "Présent dans la liste des meilleures ventes de nombreux pays"
+    },
+    {
+      "class": "samebook",
+      "title": "Liste des meilleures ventes dans de nombreux pays",
+      "content": "Présent dans la liste des meilleures ventes de nombreux pays"
+    },
+    { 
+      "class": "author",
+      "title": "Auteur à succès",
+      "content": "Afficher les auteurs à succès"
+    },
+    {
+      "class": "annuel",
+      "titre": "Trois meilleures ventes de l'année",
+      "contenu": "Afficher les trois meilleures ventes de l'année"
+    },
+    {
+      "class": "quotidien",
+      "titre": "Trois meilleures ventes instantanées",
+      "contenu": "Afficher les trois meilleures ventes instantanées"
+    },
+    {
+      "class": "nuage de mots-clés",
+      "titre": "Nuage de mots-clés",
+      "contenu": "static/images/wordcloud_de.png"
+    }
+  ]
+}
+]
