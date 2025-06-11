@@ -33,7 +33,7 @@ export async function loadLang() {
   
   // const userLang = cookieLang ? cookieLang : navigator.languages.join(',');
   try {
-    const response = await fetch('/api/language/', {
+    const response = await fetch('https://booktrend.online/api/language', {
       headers: {
         "Accept-Language": userLang
       }

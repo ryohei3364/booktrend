@@ -15,6 +15,7 @@ from .router.language import language_router
 import os
 
 app=FastAPI(redirect_slashes=True)
+
 app.include_router(language_router)
 app.include_router(card_router)
 app.include_router(search_router)
@@ -43,19 +44,23 @@ async def ranking(request: Request):
     #     "request": request,
     #     "i18n": i18n
     # })
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],  # 開發中可用 "*"，正式環境請指定 domain
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 開發中可用 "*"，正式環境請指定 domain
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.middleware("http")
 async def log_request_url(request: Request, call_next):
     print(f"👉 URL: {request.url}")
     response = await call_next(request)
     return response
+
+
+print("Serving static from:", static_path)
+
 
 # db_pool.check_processlist()
 
