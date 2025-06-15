@@ -13,7 +13,13 @@
         "topic6": "Latest Additions"
       }
     ],
-    "ranking": "Ranking"
+    "ranking": "Ranking",
+    "ranking_list": {
+        "first_bookstore_yearly": "Books.com.tw 2024 Annual Bestsellers TOP10",
+        "first_bookstore_daily": "Books.com.tw 2025 Instant Bestsellers TOP10",
+        "second_bookstore_yearly": "Thalia 2024 Annual Bestsellers TOP10",
+        "second_bookstore_daily": "Thalia 2025 Instant Bestsellers TOP10"
+    }
   },
   {
     "id": 1,

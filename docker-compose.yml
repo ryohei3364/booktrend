@@ -1,8 +1,8 @@
 services:
   booktrend-app:
     build:
-      context: ./app
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: app/Dockerfile
     container_name: booktrend-app
     ports:
       - "3000:3000"
@@ -14,8 +14,8 @@ services:
 
   nginx:
     build:
-      context: ./nginx
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: nginx/Dockerfile
     container_name: booktrend-nginx
     ports:
       - "80:80"

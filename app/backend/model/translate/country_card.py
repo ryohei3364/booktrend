@@ -36,30 +36,8 @@ async def translate_country_card(lang):
     with open(f'frontend/static/data/language/{lang}.json', "w", encoding="utf-8") as f:
       json.dump(translated_data, f, ensure_ascii=False, indent=2) 
 
+
 # 在頂層使用 asyncio.run 呼叫非同步函式
 if __name__ == "__main__":
     asyncio.run(translate_country_card("fr"))
       
-
-#     for row in authors:
-#         author_id = row['id']
-#         name = row['name']
-#         lang = row['language']
-        
-#         if not name:
-#             print(f"[跳過] id {author_id} 無 name")
-#             continue
-#         try:
-#             result = translator.translate(name, src=lang, dest='en')
-#             en_name = result.text.strip()             
-#             print(f"[成功] {name} ({lang}) => {en_name}")
-
-#             update_query = "UPDATE authors SET name_en = %s WHERE id = %s"
-#             db_pool.get_cursor(update_query, (en_name, author_id))
-#         except Exception as e:
-#             print(f"[錯誤] {name} ({lang}) 翻譯失敗 => {e}")
-
-#         time.sleep(0.5)
-
-# if __name__ == "__main__":
-#     translate_author_names()

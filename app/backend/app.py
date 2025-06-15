@@ -40,10 +40,7 @@ async def search(request: Request):
 @app.get("/ranking", response_class=HTMLResponse)
 async def ranking(request: Request):
     return templates.TemplateResponse("ranking.html", {"request": request})
-    # return templates.TemplateResponse("index.html", {
-    #     "request": request,
-    #     "i18n": i18n
-    # })
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # 開發中可用 "*"，正式環境請指定 domain

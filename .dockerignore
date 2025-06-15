@@ -18,6 +18,7 @@ yarn-debug.log
 yarn-error.log
 
 # 排除本地環境設定
+*.env
 .env
 
 # 排除 IDE 和編輯器設定檔
@@ -28,8 +29,14 @@ yarn-error.log
 # 排除操作系統的隱藏檔案
 .DS_Store
 Thumbs.db
+*.db
 
 # 指定的資料夾
-model/arrange_image/
-model/crawler/
-../frontend/static/images/resized/
+app/backend/.venv/
+app/backend/model/arrange_image/
+app/backend/model/crawler/
+app/frontend/static/images/resized/
+app/frontend/node_modules/
+
+.git
+*.sqlite3

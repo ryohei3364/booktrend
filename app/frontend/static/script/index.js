@@ -123,22 +123,6 @@ function createCountryCard(data) {
   return card;
 }
 
-// async function sendUserLanguage() {
-//   const userLanguages = navigator.languages.join(',');
-//   const response = await fetch('/api/language', {
-//     headers: {
-//       "Accept-Language": userLanguages
-//     }
-//   });
-//   const data = await response.json();
-//   console.log("後端收到的語言偏好:", data);
-// }
-
-// async function fetchCardData() {
-//   const response = await fetch("/api/language");
-//   return response.json();
-// }
-
 async function fetchCategoryData(bookstoreId) {
   const response = await fetch(`/api/card/category/${bookstoreId}`);
   return response.json();
@@ -340,19 +324,6 @@ function setupToggle(sectionDiv, header, content) {
   content.classList.remove("collapsed");
   header.querySelector("svg")?.replaceWith(createSvgIcon("less"));
 
-  // let isOpen = false;
-
-  // sectionDiv.addEventListener("mouseenter", () => {
-  //   isOpen = true;
-  //   content.classList.remove("collapsed");
-  //   header.querySelector("svg")?.replaceWith(createSvgIcon("less"));
-  // });
-
-  // sectionDiv.addEventListener("mouseleave", () => {
-  //   isOpen = false;
-  //   content.classList.add("collapsed");
-  //   header.querySelector("svg")?.replaceWith(createSvgIcon("more"));
-  // });
   sectionDiv.addEventListener("click", () => {
     isOpen = !isOpen;
 

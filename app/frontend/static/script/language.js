@@ -1,39 +1,12 @@
-async function getUserCookie() {
-  const langcode = getCookie("booktrend-lang");
-  if (langcode) {
-    console.log("使用者語言偏好為：", langcode);
-    return langcode;
-  } else {
-    console.log("未設定語言偏好，讀取使用者的語言偏好，並設置成cookies");
-    const langcode = navigator.languages[0];  // 只取第一個語言
-    setLangPrefer(langcode);
-    return langcode;
-  }
-}
-
-// 設定語言偏好（儲存在 cookie 中，有效期一年）
-function setLangPrefer(langcode) {
-  const langToStore = Array.isArray(langcode) ? langcode[0] : langcode || '';
-  document.cookie = `booktrend-lang=${langToStore}; path=/; max-age=31536000`;
-}
-
-// 讀取特定 cookie 值
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-  return null;
-}
-
 // 多國語系切換
 export async function loadLang() {
   const cookieLang = await getUserCookie();
   // 如果 cookie 中有設定語言偏好，就使用它；否則使用瀏覽器提供的語言清單
-  const userLang = cookieLang || navigator.languages[0] || 'zh-TW';
+  const userLang = cookieLang || navigator.languages[0];
   
   // const userLang = cookieLang ? cookieLang : navigator.languages.join(',');
   try {
-    const response = await fetch('https://booktrend.online/api/language', {
+    const response = await fetch('/api/language/', {
       headers: {
         "Accept-Language": userLang
       }
@@ -77,6 +50,34 @@ export function switchLang() {
     }
   }
 };
+
+
+async function getUserCookie() {
+  const langcode = getCookie("booktrend-lang");
+  if (langcode) {
+    console.log("使用者語言偏好為：", langcode);
+    return langcode;
+  } else {
+    console.log("未設定語言偏好，讀取使用者的語言偏好，並設置成cookies");
+    const langcode = navigator.languages[0];  // 只取第一個語言
+    setLangPrefer(langcode);
+    return langcode;
+  }
+}
+
+// 設定語言偏好（儲存在 cookie 中，有效期一年）
+function setLangPrefer(langcode) {
+  const langToStore = Array.isArray(langcode) ? langcode[0] : langcode || '';
+  document.cookie = `booktrend-lang=${langToStore}; path=/; max-age=31536000`;
+}
+
+// 讀取特定 cookie 值
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
 
 // 讀取 cookie 語言函式
 function getLangFromCookie() {

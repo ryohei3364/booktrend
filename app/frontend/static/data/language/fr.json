@@ -13,7 +13,13 @@
         "topic6": "Derniers ajouts"
       }
     ],
-    "ranking": "Classement"
+    "ranking": "Classement",
+    "ranking_list": {
+        "first_bookstore_yearly": "Top 10 des meilleures ventes annuelles Books.com.tw 2024",
+        "first_bookstore_daily": "Top 10 des meilleures ventes instantanées Books.com.tw 2025",
+        "second_bookstore_yearly": "Top 10 des meilleures ventes annuelles Thalia 2024",
+        "second_bookstore_daily": "Top 10 des meilleures ventes instantanées Thalia 2025"
+    }
   },
   {
     "id": 1,

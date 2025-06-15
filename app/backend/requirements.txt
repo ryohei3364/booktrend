@@ -4,4 +4,7 @@ python-dotenv==1.0.1
 python-multipart==0.0.20
 uvicorn==0.34.0
 python-dotenv==1.0.1
-jinja2
+Jinja2==3.1.6
+numpy==1.26.4
+fasttext==0.9.3
+# Successfully uninstalled numpy-2.2.6

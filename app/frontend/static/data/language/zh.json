@@ -13,7 +13,13 @@
         "topic6": "最新加入"
       }
     ],
-    "ranking": "排行榜"
+    "ranking": "排行榜",
+    "ranking_list": {
+        "first_bookstore_yearly": "博客來 2024年 年度暢銷書 TOP10",
+        "first_bookstore_daily": "博客來 2025年 即時暢銷書 TOP10",
+        "second_bookstore_yearly": " Thalia 2024年 年度暢銷書 TOP10",
+        "second_bookstore_daily": "Thalia 2025年 即時暢銷書 TOP10"
+    }
   },
   {
     "id": 1,

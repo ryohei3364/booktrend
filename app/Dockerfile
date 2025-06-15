@@ -13,5 +13,6 @@ COPY frontend/ ./frontend/
 
 # 確保 backend 是 Python package（已加 __init__.py）
 # 啟動 FastAPI，從 backend.app:app
+# 本地測試在 app 資料夾啟動 uvicorn.backend.app:app --reload
 CMD ["uvicorn", "backend.app:app", "--host", "0.0.0.0", "--port", "3000"]
 

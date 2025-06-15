@@ -3,14 +3,6 @@ import random
 from ..model.country_card import generate_category, generate_wordcloud, generate_same_book, generate_author, generate_yearly, generate_daily
 
 card_router = APIRouter(prefix="/api/card", tags=["card"])
-    
-# @card_router.get("")
-# async def get_cards():
-    
-#     with open('frontend/static/data/countryCard/countryCard.json', encoding="utf-8") as f:
-#         data = json.load(f)
-#     return JSONResponse(content=data)
-
 
 @card_router.get("/category/{bookstore_id}")
 async def get_cards_category(bookstore_id: int):
@@ -20,8 +12,6 @@ async def get_cards_category(bookstore_id: int):
     # print(limited_data)
 
     # 提取 label 和數量
-    # labels = [item["parent_category_name"] for item in limited_data]
-    # data = [item["total_books"] for item in limited_data]
     labels = [item["category_name"] for item in limited_data]
     data = [item["book_count"] for item in limited_data]
     background_colors = [f"rgb({random.randint(0,255)},{random.randint(0,255)},{random.randint(0,255)})" for _ in range(len(labels))]

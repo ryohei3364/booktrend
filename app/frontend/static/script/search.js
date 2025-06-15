@@ -3,17 +3,14 @@
 import { initNavbar } from './navbar.js';
 await initNavbar();  // 等待 navbar 完成後再繼續執行
 
-import { loadLang } from './language.js';
+import { switchLang, loadLang } from './language.js';
+switchLang();  // 綁定語言選單
 
-const { langContent } = await loadLang();
-console.log(langContent);
-
-// async function initPage() {
-//   // await getUserCookie();
-//   const { langContent } = await loadLang();
-//   console.log(langContent);
-// }
-// initPage();
+async function initPage() {
+  // await getUserCookie();
+  const { langContent } = await loadLang();
+}
+initPage();
 
 let cachedLang = null;
 renderSearch();
@@ -48,18 +45,44 @@ function renderSearch() {
     });
 }
 
+async function fetchHotSearches() {
+  const response = await fetch('/api/search/hot');
+  return response.json();
+}
+
 function updateDOMWithLang(data) {
   document.getElementById("title").textContent = data.search_title;
   document.getElementById("searchInput").placeholder = data.search_placeholder;
-  for (let i = 1; i <= 6; i++) {
-    const el = document.getElementById(`topic${i}`);
-    if (el && data[`topic${i}`]) {
-      el.textContent = data[`topic${i}`];
-    }
-  }
+
+  // ✅ 另外呼叫 fetchHotSearches 來填熱門關鍵字
+  fetchHotSearches()
+    .then((hotKeywords) => {
+      console.log("🔥 熱門搜尋關鍵字：", hotKeywords);
+
+      for (let i = 1; i <= 6; i++) {
+        const el = document.getElementById(`topic${i}`);
+        const keyword = hotKeywords[i - 1]['keyword'];
+        if (el && keyword) {
+          el.textContent = keyword;
+          el.style.cursor = "pointer"; // 滑鼠提示可點擊
+          el.onclick = () => triggerSearch(keyword);
+        }
+      }
+    })
+    .catch((err) => {
+      console.error("載入熱門搜尋失敗：", err);
+    });
+}
+
+function triggerSearch(keyword) {
+  const input = document.getElementById("searchInput");
+  input.value = keyword; // 填入搜尋框
+  // document.getElementById("searchButton").click(); // 模擬點擊搜尋按鈕
+  searchBooks(keyword);  // <== 呼叫搜尋函數，觸發搜尋
 }
 
 function searchBooks(keyword) {
+  console.log("搜尋關鍵字：", keyword);
   fetch(`/api/search?keyword=${encodeURIComponent(keyword)}`)
     .then((res) => res.json())
     .then((results) => {
@@ -146,45 +169,3 @@ function highlightKeyword(text, keyword) {
 
   return fragment;
 }
-
-
-
-// let debounceTimer = null;
-
-// document.getElementById("searchInput").addEventListener("input", function () {
-//   clearTimeout(debounceTimer); // 每次輸入都會「重新計時」，防止短時間內發送過多 API 請求
-
-//   const keyword = this.value.trim();
-//   if (!keyword) return;
-
-//   debounceTimer = setTimeout(() => {
-//     fetch(`/api/search?keyword=${encodeURIComponent(keyword)}`)
-//       .then((res) => res.json())
-//       .then((data) => {
-//         const resultsDiv = document.getElementById("searchResults");
-//         resultsDiv.innerHTML = "";
-
-//         const fragment = document.createDocumentFragment();
-
-//         data.forEach((book) => {
-//           const bookDiv = document.createElement("div");
-
-//           const titleEl = document.createElement("h3");
-//           titleEl.appendChild(highlightKeyword(book.title, keyword));
-
-//           const descEl = document.createElement("p");
-//           descEl.appendChild(highlightKeyword(book.description, keyword));
-
-//           bookDiv.appendChild(titleEl);
-//           bookDiv.appendChild(descEl);
-//           bookDiv.appendChild(document.createElement("hr"));
-
-//           fragment.appendChild(bookDiv);
-//         });
-//         resultsDiv.appendChild(bookDiv);
-//       })
-//       .catch((err) => {
-//         console.error("搜尋失敗", err);
-//       });
-//   }, 300);
-// });
