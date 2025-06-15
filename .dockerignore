@@ -20,6 +20,7 @@ yarn-error.log
 # 排除本地環境設定
 *.env
 .env
+**/.env
 
 # 排除 IDE 和編輯器設定檔
 .idea/

@@ -1,0 +1,30 @@
+services:
+  booktrend-app:
+    image: ryohei3364/booktrend-app:latest
+    container_name: booktrend-app
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./app/backend/.env
+    restart: on-failure
+    networks:
+      - backend
+
+  nginx:
+    image: ryohei3364/booktrend-nginx:latest
+    container_name: booktrend-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./ssl/certificate.crt:/etc/nginx/ssl/certificate.crt:ro
+      - ./ssl/private.key:/etc/nginx/ssl/private.key:ro
+    depends_on:
+      - booktrend-app
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
