@@ -11,8 +11,6 @@ def get_description(bookstore_id: int):
   return db_pool.get_cursor(query, (bookstore_id,), fetch=True)
 
 
-
-
 def generate_wordcloud(bookstore_id: int):
   query = "SELECT wordcloud_json FROM bookstores WHERE id = %s"    
   result = db_pool.get_cursor(query, (bookstore_id,), fetch=True)
@@ -72,12 +70,18 @@ def generate_yearly(bookstore_id: int):
     JOIN books b ON r.book_id = b.id
     JOIN authors a ON b.author_id = a.id
     WHERE r.ranking <= 3
-      AND r.chart_type IN ('spiegel', 'yearly')
+      AND r.chart_type IN ('yearly')
       AND r.bookstore_id = %s
+      AND r.chart_date = (
+        SELECT MAX(chart_date)
+        FROM rankings
+        WHERE chart_type IN ('yearly')
+          AND bookstore_id = %s
+      )
     ORDER BY r.ranking;
     """
     # print(db_pool.get_cursor(query, (bookstore_id,), fetch=True))
-    return db_pool.get_cursor(query, (bookstore_id,), fetch=True)
+    return db_pool.get_cursor(query, (bookstore_id, bookstore_id), fetch=True)
 
 
 def generate_daily(bookstore_id: int):
@@ -91,12 +95,18 @@ def generate_daily(bookstore_id: int):
     JOIN books b ON r.book_id = b.id
     JOIN authors a ON b.author_id = a.id
     WHERE r.ranking <= 3
-      AND r.chart_type IN ('daily')
+      AND r.chart_type = 'daily'
       AND r.bookstore_id = %s
+      AND r.chart_date = (
+        SELECT MAX(chart_date)
+        FROM rankings
+        WHERE chart_type = 'daily'
+          AND bookstore_id = %s
+      )
     ORDER BY r.ranking;
     """
     # print(db_pool.get_cursor(query, (bookstore_id,), fetch=True))
-    return db_pool.get_cursor(query, (bookstore_id,), fetch=True)
+    return db_pool.get_cursor(query, (bookstore_id, bookstore_id), fetch=True)
   
   
   

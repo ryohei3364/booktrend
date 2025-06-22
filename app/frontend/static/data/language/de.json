@@ -19,6 +19,30 @@
         "first_bookstore_daily": "Books.com.tw Sofortbestseller TOP10 2025",
         "second_bookstore_yearly": "Thalia Jahresbestseller TOP10 2024",
         "second_bookstore_daily": "Thalia Sofortbestseller TOP10 2025"
+    },
+    "forum": "Forum",
+    "member": {
+        "photo": "Avatar ändern",
+        "logout": "Abmelden"
+    },
+    "login": "Anmelden",
+    "login_list": {
+        "google": "Weiter zum Google-Konto",
+        "threads": "Weiter zum Threads-Konto",
+        "email": {
+          "label": "E-Mail",
+          "options": [
+            {"title": "Anmelden mitglied", "email": "E-Mail", "password": "Passwort", "submit": "Senden", "message": "Noch kein Konto?", "goto": "Registrieren"}
+          ]
+        }
+    },
+    "register_list": {
+        "email": {
+          "label": "E-Mail",
+          "options": [
+            {"title": "Registrieren mitglied", "name": "Mitgliedsname", "email": "E-Mail", "password": "Passwort", "submit": "Registrieren"}
+          ]
+        }
     }
   },
   {

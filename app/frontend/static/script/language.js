@@ -40,19 +40,19 @@ export function switchLang() {
     const currentLang = getLangFromCookie();
     if (currentLang) {
       // 對應 zh-TW 這種情況，只取 zh 部分
-      const normalizedLang = currentLang.split('-')[0];
+      // const normalizedLang = currentLang.split('-')[0];
       const options = Array.from(langSelect.options).map(opt => opt.value);
-      if (options.includes(normalizedLang)) {
-        langSelect.value = normalizedLang;  // ✅ 選中對應語言
+      if (options.includes(currentLang)) {
+        langSelect.value = currentLang;  // ✅ 選中對應語言
       } else {
-        langSelect.value = 'en';  // fallback 預設
+        langSelect.value = 'en-US';  // fallback 預設
       }
     }
   }
 };
 
 
-async function getUserCookie() {
+export async function getUserCookie() {
   const langcode = getCookie("booktrend-lang");
   if (langcode) {
     console.log("使用者語言偏好為：", langcode);
@@ -66,13 +66,13 @@ async function getUserCookie() {
 }
 
 // 設定語言偏好（儲存在 cookie 中，有效期一年）
-function setLangPrefer(langcode) {
+export function setLangPrefer(langcode) {
   const langToStore = Array.isArray(langcode) ? langcode[0] : langcode || '';
   document.cookie = `booktrend-lang=${langToStore}; path=/; max-age=31536000`;
 }
 
 // 讀取特定 cookie 值
-function getCookie(name) {
+export function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop().split(';').shift();
@@ -80,7 +80,7 @@ function getCookie(name) {
 }
 
 // 讀取 cookie 語言函式
-function getLangFromCookie() {
+export function getLangFromCookie() {
   const match = document.cookie.match(/(^|;) ?booktrend-lang=([^;]*)/);
   return match ? match[2] : null;
 }

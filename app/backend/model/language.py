@@ -15,19 +15,19 @@ def get_language_code(request: Request):
     if user_lang_cookie:
         language = [user_lang_cookie.lower()]
     else:
-        language = [lang.strip().split(";")[0].lower() for lang in accept_language.split(",") if lang]
+        language = [lang.strip().split(";").lower() for lang in accept_language.split(",") if lang]
     print(language[0])
     return language[0]
 
 
 def get_language_data(request: Request):
     primary_code = get_language_code(request)
+    print("primary_code:", primary_code)
     # 支援的語言對應檔案
     lang_map = {
         "de": "de.json",
-        "tw": "zh.json",
-        "zh": "zh.json",
-        "en": "en.json",
+        "zh-tw": "zh.json",
+        "en-us": "en.json",
         "fr": "fr.json",
     }
 

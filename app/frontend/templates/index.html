@@ -5,23 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BookTrend 全球書籍儀表板</title>
   <link rel="icon" href="/static/images/favicon.png" type="image/png">
+  <link rel="stylesheet" type="text/css" href='static/style/auth.css'>
   <link rel="stylesheet" type="text/css" href='static/style/core.css'>
-  <!-- <link rel="stylesheet" type="text/css" href="https://booktrend.online/static/style/core.css"> -->
+
   {% block link %}
   <link rel="stylesheet" type="text/css" href="static/style/index.css">
-  <!-- <link rel="stylesheet" type="text/css" href="https://booktrend.online/static/style/index.css"> -->
   {% endblock %}
 
-  {% block script %}
+  <script type="module" src="static/script/auth.js" defer></script>
   <script type="module" src="static/script/navbar.js" defer></script>
-  <!-- <script type="module" src="https://booktrend.online/static/script/navbar.js" defer></script> -->
+
+  {% block script %}
   <script async src="https://d3js.org/d3.v7.min.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/d3-cloud/build/d3.layout.cloud.min.js"></script>
   <script async src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="module" src="static/script/index.js" defer></script>
-  <!-- <script type="module" src="https://booktrend.online/static/script/index.js" defer></script> -->
-  <!-- <script async src="/static/script/index.js"></script> -->
-
   {% endblock %}
 </head>
 <body>
@@ -37,6 +35,7 @@
             <div class="menu__item--header">
               <a href="/search" class="menu__item--header--a" id="searchNav"></a>
               <a href="/ranking" class="menu__item--header--a" id="rankingNav"></a>
+              <!-- <a href="/forum" class="menu__item--header--a" id="forumNav"></a> -->
             </div>
           </div>
         </div>
@@ -45,18 +44,20 @@
         <!-- <form class="menu__item--search" role="search"> 
           <input type="search" class="form-control" placeholder="搜尋關鍵字" aria-label="Search"> 
         </form> -->
-        <div class="menu__item--language" id="langSwitcher">
-          <select id="language-select">
-            <option value="zh">繁體中文</option>
-            <option value="en">English</option>
+        <div class="menu__item--language" id="langSwitcher" style="visibility: hidden;">
+          <select class="language-select" id="language-select">
+            <option value="zh-TW">繁體中文</option>
+            <option value="en-US">English</option>
             <option value="de">Deutsch</option>
             <option value="fr">Français</option>
           </select>
         </div>
         <div class="menu__item--member">
-          <a href="#" class="menu__item--member--user">
-            <img src="static/images/98681.jpeg" alt="photo" class="rounded-circle";>
+          <button class="menu__item--member--login" id="loginNav"></button>
+          <a href="/member" class="menu__item--member--user" style="display: none;">
+            <img id="userPic" src="static/images/user.jpg" alt="photo" class="rounded-circle";>
           </a>
+        </div>
       </div>
     </nav>
 	</nav>
@@ -64,6 +65,42 @@
     <div class="slogan">書，照見一個國家的深層樣貌。</div>
     <div class="background"></div>
   </section> -->
+  <!-- <dialog id="loginDialog" style="display:none"> -->
+
+  <!-- ✅ 登入選擇（Google / Email） -->
+  <dialog id="loginDialog">
+    <div id="loginContent">
+      <button type="button" id="submitGoogle" class="menu__item--member--login"></button>
+      <button type="button" id="submitEmail" class="menu__item--member--login"></button>
+    </div>
+  </dialog>
+
+  <!-- ✅ Email 登入表單 -->
+  <dialog id="loginEmailDialog">
+    <form id="loginForm">
+      <h3 id="loginTitle"></h3>
+      <input type="email" id="loginEmail" placeholder="" required>
+      <input type="password" id="loginPassword" placeholder="" required autocomplete="off">
+      <button type="submit" id="loginSubmit" class="menu__item--member--login"></button>
+      <p>
+        <span id="loginMessage"></span>
+        <a href="#" id="goToRegister"></a>
+      </p>
+    </form>
+  </dialog>
+
+  <!-- ✅ 註冊表單 -->
+  <dialog id="registerDialog">
+    <form id="registerForm">
+      <h3 id="registerTitle"></h3>
+      <input type="text" id="registerName" placeholder="" required>
+      <input type="email" id="registerEmail" placeholder="" required>
+      <input type="password" id="registerPassword" placeholder="" required autocomplete="off">
+      <button type="submit" id="registerSubmit" class="menu__item--member--login"></button>
+      <!-- <div id="registerError" style="color:red;"></div> 預留錯誤訊息顯示區 -->
+    </form>
+  </dialog>
+
   <main>
   {% block main %}
     <div class="main__card--container"></div>

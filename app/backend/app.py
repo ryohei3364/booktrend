@@ -8,6 +8,7 @@ from .router.country_card import card_router
 from .router.search import search_router
 from .router.ranking import ranking_router
 from .router.language import language_router
+from .router.auth import auth_router
 # from router.country_card import card_router
 # from router.search import search_router
 # from router.ranking import ranking_router
@@ -20,6 +21,7 @@ app.include_router(language_router)
 app.include_router(card_router)
 app.include_router(search_router)
 app.include_router(ranking_router)
+app.include_router(auth_router)
 # templates = Jinja2Templates(directory="frontend/templates")
 # app.mount("/static", StaticFiles(directory=os.path.join("frontend", "static")), name="static")
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # BookTrend 根目錄
@@ -40,6 +42,14 @@ async def search(request: Request):
 @app.get("/ranking", response_class=HTMLResponse)
 async def ranking(request: Request):
     return templates.TemplateResponse("ranking.html", {"request": request})
+
+@app.get("/forum", response_class=HTMLResponse)
+async def forum(request: Request):
+    return templates.TemplateResponse("forum.html", {"request": request})
+
+@app.get("/member", response_class=HTMLResponse)
+async def forum(request: Request):
+    return templates.TemplateResponse("member.html", {"request": request})
 
 app.add_middleware(
     CORSMiddleware,

@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+
+  {% block link %}
+  <link rel="stylesheet" type="text/css" href='static/style/member.css'>
+  {% endblock %}
+
+  {% block script %}
+  <script type="module" src="static/script/member.js" defer></script>
+  {% endblock %}
+
+  {% block main %}
+  <div class="member__container">
+    <img id="memberPic" src="/static/images/user.jpg" class="member-avatar" />
+    <div class="member-name" id="memberName"></div>
+    <div class="member-email" id="memberEmail"></div>
+
+    <div class="member-actions">
+      <button class="btn-change-pic" id="changePicBtn"></button>
+      <button class="btn-logout" id="logoutBtn"></button>
+    </div>
+  </div>
+  {% endblock %}

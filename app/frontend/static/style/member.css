@@ -1,0 +1,65 @@
+main div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.member-container {
+  max-width: 600px;
+  margin: 100px auto 50px auto;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 12px var(--card-shadow);
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+}
+
+.member-avatar {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--mintgreen-color);
+  margin: 0 auto 20px auto; /* ✅ 水平置中 */
+  display: block;           /* ✅ 頭像設為區塊元素 */
+}
+
+.member-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 auto 10px auto; /* ✅ 水平置中 */
+}
+
+.member-email {
+  font-size: 16px;
+  color: #888;
+  margin: 0 auto 10px auto; /* ✅ 水平置中 */
+}
+
+.member-actions button {
+  padding: 10px 20px;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.btn-logout {
+  background-color: #aaa;
+  color: white;
+}
+
+.btn-change-pic {
+  background-color: var(--mintgreen-color);
+  color: white;
+}
+
+.btn-logout:hover {
+  background-color: #888;
+}
+
+.btn-change-pic:hover {
+  background-color: var(--darkgreen-color);
+}

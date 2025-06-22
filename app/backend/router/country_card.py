@@ -25,18 +25,18 @@ async def get_cards_category(bookstore_id: int):
                 "backgroundColor": background_colors
             }
         ],
-        "translations":{
-            "商業理財": "Business and Finance",
-            "心理勵志": "Psychological Inspiration",
-            "童書/青少年文學": "Children's Books/Youth Literature",
-            "文學小說": "Literary Fiction",
-            "漫畫/圖文書": "Comics/Picture Books", 
-            "人文社科": "Humanities and Social Sciences",
-            "宗教命理": "Religion and Numerology",
-            "醫療保健": "Health Care",
-            "生活風格": "Lifestyle",
-            "國中小參考書": "Elementary and Middle School Reference Books"
-        }
+        # "translations":{
+        #     "商業理財": "Business and Finance",
+        #     "心理勵志": "Psychological Inspiration",
+        #     "童書/青少年文學": "Children's Books/Youth Literature",
+        #     "文學小說": "Literary Fiction",
+        #     "漫畫/圖文書": "Comics/Picture Books", 
+        #     "人文社科": "Humanities and Social Sciences",
+        #     "宗教命理": "Religion and Numerology",
+        #     "醫療保健": "Health Care",
+        #     "生活風格": "Lifestyle",
+        #     "國中小參考書": "Elementary and Middle School Reference Books"
+        # }
     }
     return chart_data 
 

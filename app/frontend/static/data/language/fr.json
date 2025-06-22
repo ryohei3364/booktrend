@@ -19,6 +19,30 @@
         "first_bookstore_daily": "Top 10 des meilleures ventes instantanées Books.com.tw 2025",
         "second_bookstore_yearly": "Top 10 des meilleures ventes annuelles Thalia 2024",
         "second_bookstore_daily": "Top 10 des meilleures ventes instantanées Thalia 2025"
+    },
+    "forum": "Forum",
+    "member": {
+        "photo": "Changer d'avatar",
+        "logout": "Déconnexion"
+    },
+    "login": "Se connecter",
+    "login_list": {
+        "google": "Continuer vers le compte Google",
+        "threads": "Continuer vers le compte Threads",
+        "email": {
+          "label": "S'inscrire un Email",
+          "options": [
+            {"title": "Se connecter", "name": "Nom", "email": "E-mail", "password": "Mot de passe", "submit": "Envoyer", "message": "Pas encore de compte ?", "goto": "Envoyer"}
+          ]
+        }
+    },
+    "register_list": {
+        "email": {
+          "label": "S'inscrire un Email",
+          "options": [
+            {"title": "S'inscrire un membre", "name": "Nom", "email": "E-mail", "password": "Mot de passe", "submit": "S'inscrire"}
+          ]
+        }
     }
   },
   {

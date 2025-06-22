@@ -19,6 +19,30 @@
         "first_bookstore_daily": "博客來 2025年 即時暢銷書 TOP10",
         "second_bookstore_yearly": " Thalia 2024年 年度暢銷書 TOP10",
         "second_bookstore_daily": "Thalia 2025年 即時暢銷書 TOP10"
+    },
+    "forum": "討論區",
+    "member": {
+        "photo": "更換頭像",
+        "logout": "登出"
+    },
+    "login": "登入",
+    "login_list": {
+        "google": "繼續 Google 登入",
+        "threads": "繼續 Threads 登入",
+        "email": {
+          "label": "繼續 Email 登入",
+          "options": [
+            {"title": "登入會員", "email": "電子郵件", "password": "密碼", "submit": "送出", "message": "還沒有帳號？", "goto": "註冊"}
+          ]
+        }
+    },
+    "register_list": {
+        "email": {
+          "label": "使用 Email 註冊",
+          "options": [
+            {"title": "註冊會員", "name": "會員名稱", "email": "電子郵件", "password": "密碼", "submit": "送出"}
+          ]
+        }
     }
   },
   {

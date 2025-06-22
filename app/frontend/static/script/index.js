@@ -9,6 +9,7 @@ async function initPage() {
   const { countryList } = await loadLang();
   // renderNav(langContent);
   renderCard(countryList);
+  // ✅ 語言載入完再顯示畫面
 }
 
 let sectionRenderQueue = [];
@@ -69,6 +70,7 @@ function createCountryCard(data) {
 
 	const title = document.createElement("div");
   title.className = "main__card--title";
+  title.title = data.country;  // ✅ 滑鼠懸停時顯示
 
 	const span = document.createElement('span');
   span.className = "main__card--country";

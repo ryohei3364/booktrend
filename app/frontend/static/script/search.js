@@ -15,7 +15,6 @@ initPage();
 let cachedLang = null;
 renderSearch();
 
-
 document.getElementById("searchInput").addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     const keyword = e.target.value.trim();
