@@ -54,9 +54,6 @@ const registerEmail = document.getElementById('registerEmail');
 const registerPassword = document.getElementById('registerPassword');
 const registerSubmit = document.getElementById('registerSubmit');
 
-const changePicBtn = document.getElementById('changePicBtn');
-const logoutBtn = document.getElementById('logoutBtn');
-
 async function renderNav(data) {
   searchNav.textContent = data.search;
   rankingNav.textContent = data.ranking;
@@ -78,17 +75,18 @@ async function renderNav(data) {
   registerEmail.placeholder = data.register_list.email.options[0].email;
   registerPassword.placeholder = data.register_list.email.options[0].password;
   registerSubmit.textContent = data.register_list.email.options[0].submit;
-
-  changePicBtn.textContent = data.member.photo;
-  logoutBtn.textContent = data.member.logout;
 }
 
 function updateMemberInfo(user) {
   const nameDiv = document.getElementById("memberName");
   const emailDiv = document.getElementById("memberEmail");
   const picImg = document.getElementById("memberPic");
+  const changePicBtn = document.getElementById('changePicBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
 
   if (nameDiv) nameDiv.textContent = user.name;
   if (emailDiv) emailDiv.textContent = user.email;
   if (picImg && user.picture) picImg.src = user.picture;
+  if (changePicBtn) changePicBtn.textContent = data.member.photo;
+  if (logoutBtn) logoutBtn.textContent = data.member.logout;
 }

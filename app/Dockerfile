@@ -8,15 +8,17 @@ RUN apt-get update && apt-get install -y build-essential g++ \
     && rm -rf /var/lib/apt/lists/*
 		
 # 安裝 Python 套件
-COPY app/backend/requirements.txt ./backend/
+COPY backend/requirements.txt ./backend/
 RUN pip install --upgrade pip && pip install --no-cache-dir -r ./backend/requirements.txt
 
 # 複製整個 app 下的 backend 和 frontend（保持原本的資料夾位置）
-COPY app/backend/ ./backend/
-COPY app/frontend/ ./frontend/
+COPY backend/ ./backend/
+COPY frontend/ ./frontend/
 
 # 確保 backend 是 Python package（已加 __init__.py）
 # 啟動 FastAPI，從 backend.app:app
 # 本地測試在 app 資料夾啟動 uvicorn.backend.app:app --reload
 CMD ["uvicorn", "backend.app:app", "--host", "0.0.0.0", "--port", "3000"]
 
+# WORKDIR /app 之後，copy backend/ 和 frontend/ 進 /app/backend 和 /app/frontend
+# 安裝 backend/requirements.txt 的套件

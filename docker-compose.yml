@@ -1,8 +1,10 @@
+# 執行 build 命令時，要在 BookTrend 目錄執行
+
 services:
   booktrend-app:
     build:
-      context: .
-      dockerfile: app/Dockerfile
+      context: ./app   # 指向 BookTrend/app
+      dockerfile: Dockerfile  # 會去 ./app/Dockerfile
     container_name: booktrend-app
     ports:
       - "3000:3000"
@@ -14,8 +16,8 @@ services:
 
   nginx:
     build:
-      context: .
-      dockerfile: nginx/Dockerfile
+      context: ./nginx  # 指向 BookTrend/nginx
+      dockerfile: Dockerfile   # 會去 BookTrend/.nginx/Dockerfile
     container_name: booktrend-nginx
     ports:
       - "80:80"

@@ -3,7 +3,6 @@ export async function loadLang() {
   const cookieLang = await getUserCookie();
   // 如果 cookie 中有設定語言偏好，就使用它；否則使用瀏覽器提供的語言清單
   const userLang = cookieLang || navigator.languages[0];
-  
   // const userLang = cookieLang ? cookieLang : navigator.languages.join(',');
   try {
     const response = await fetch('/api/language/', {

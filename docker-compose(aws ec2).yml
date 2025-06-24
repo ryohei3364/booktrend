@@ -5,7 +5,7 @@ services:
     ports:
       - "3000:3000"
     env_file:
-      - ./app/backend/.env
+      - ./.env
     restart: on-failure
     networks:
       - backend
@@ -24,6 +24,7 @@ services:
       - booktrend-app
     networks:
       - backend
+
 
 networks:
   backend:

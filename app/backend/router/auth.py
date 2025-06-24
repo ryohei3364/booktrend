@@ -25,7 +25,7 @@ def get_google_oauth_url():
     base_url = "https://accounts.google.com/o/oauth2/v2/auth"
     params = {
         "client_id": GOOGLE_CLIENT_ID,
-        "redirect_uri": REDIRECT_URI_test,
+        "redirect_uri": REDIRECT_URI,
         "response_type": "code",
         "scope": "openid email profile",
         "access_type": "offline",
@@ -39,37 +39,86 @@ def get_google_oauth_url():
 # Google 授權後回傳 code 的處理路由
 @auth_router.get("/google/callback")
 def google_oauth_callback(request: Request, code: str):
-    code = request.query_params.get("code")
-    print("收到 Google code:", code)
-    if not code:
-        return JSONResponse({"error": "No code provided"}, status_code=400)
+    try:
+        print("收到 Google code:", code)
+        if not code:
+            return JSONResponse({"error": "No code provided"}, status_code=400)
 
-    # Step 1: 用 code 換 access_token
-    token_url = "https://oauth2.googleapis.com/token"
-    data = {
-        "code": code,
-        "client_id": GOOGLE_CLIENT_ID,
-        "client_secret": GOOGLE_CLIENT_SECRET,
-        "redirect_uri": REDIRECT_URI_test,
-        "grant_type": "authorization_code",
-    }
+        # Step 1: 換 token
+        token_url = "https://oauth2.googleapis.com/token"
+        data = {
+            "code": code,
+            "client_id": GOOGLE_CLIENT_ID,
+            "client_secret": GOOGLE_CLIENT_SECRET,
+            "redirect_uri": REDIRECT_URI,
+            "grant_type": "authorization_code",
+        }
 
-    token_response = requests.post(token_url, data=data)
-    token_json = token_response.json()
-    access_token = token_json.get("access_token")
-    print(access_token)
+        token_response = requests.post(token_url, data=data)
+        print("Token response:", token_response.text)
+
+        if token_response.status_code != 200:
+            return JSONResponse(status_code=500, content={"error": "取得 token 失敗", "detail": token_response.text})
+
+        token_json = token_response.json()
+        access_token = token_json.get("access_token")
+
+        if not access_token:
+            return JSONResponse(status_code=500, content={"error": "access_token 不存在", "detail": token_json})
+
+        # Step 2: 拿使用者資訊
+        userinfo_response = requests.get(
+            "https://www.googleapis.com/oauth2/v1/userinfo",
+            headers={"Authorization": f"Bearer {access_token}"}
+        )
+
+        if userinfo_response.status_code != 200:
+            return JSONResponse(status_code=500, content={"error": "取得使用者資訊失敗", "detail": userinfo_response.text})
+
+        userinfo = userinfo_response.json()
+        print("👤 User Info:", userinfo)
+
+        # Step 3: 寫入資料庫
+        userinfo = Auth.insert_user_data_google(userinfo)
+        return userinfo
+
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": "callback 錯誤", "detail": str(e)})
+
+# @auth_router.get("/google/callback")
+# def google_oauth_callback(request: Request, code: str):
+#     code = request.query_params.get("code")
+#     print("收到 Google code:", code)
+#     if not code:
+#         return JSONResponse({"error": "No code provided"}, status_code=400)
+
+#     # Step 1: 用 code 換 access_token
+#     token_url = "https://oauth2.googleapis.com/token"
+#     data = {
+#         "code": code,
+#         "client_id": GOOGLE_CLIENT_ID,
+#         "client_secret": GOOGLE_CLIENT_SECRET,
+#         "redirect_uri": REDIRECT_URI,
+#         "grant_type": "authorization_code",
+#     }
+#     print('data:', data)
+
+#     token_response = requests.post(token_url, data=data)
+#     token_json = token_response.json()
+#     access_token = token_json.get("access_token")
+#     print('access_token:', access_token)
     
-    # Step 2: 用 access_token 拿使用者資訊
-    userinfo_response = requests.get(
-        "https://www.googleapis.com/oauth2/v1/userinfo",
-        headers={"Authorization": f"Bearer {access_token}"}
-    )
-    userinfo = userinfo_response.json()
-    print("👤 User Info:", userinfo)
+#     # Step 2: 用 access_token 拿使用者資訊
+#     userinfo_response = requests.get(
+#         "https://www.googleapis.com/oauth2/v1/userinfo",
+#         headers={"Authorization": f"Bearer {access_token}"}
+#     )
+#     userinfo = userinfo_response.json()
+#     print("👤 User Info:", userinfo)
 
-    # Step 3: 寫入資料庫
-    userinfo = Auth.insert_user_data_google(userinfo)
-    return userinfo
+#     # Step 3: 寫入資料庫
+#     userinfo = Auth.insert_user_data_google(userinfo)
+#     return userinfo
 
 
 # 前端 email 回傳 處理路由

@@ -21,6 +21,7 @@ yarn-error.log
 *.env
 .env
 **/.env
+backend/.env
 
 # 排除 IDE 和編輯器設定檔
 .idea/

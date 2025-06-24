@@ -350,7 +350,6 @@ function createChart(canvas, chartData, defaultType = "doughnut") {
 
   // 從 chartData 取出翻譯對應表（如果有）
   const translations = chartData.translations || {};
-  console.log(translations);
 
   // 判斷是否為完整的 Chart.js 設定（含 type 和 options）
   const config = chartData.type
