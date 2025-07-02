@@ -1,3 +1,5 @@
+![booktrend logo](<public/booktrend_logo.png>)
+
 # BookTrend - Global Book Trend Monitoring Platform
 BookTrend is a web platform that visualizes global bookstore bestseller trends with multilingual support. Users can explore real-time rankings by country, category, or keyword to discover popular books across different markets.
 
@@ -11,8 +13,6 @@ BookTrend is a web platform that visualizes global bookstore bestseller trends w
 | test   | test@test |
 
 </div>
-
-![booktrend logo](<public/booktrend_logo.png>)
 
 # Main Feature
 ### multilingual interface support
@@ -44,7 +44,7 @@ Country-specific keyword word clouds for visualizing book trends.
 ![multilingual gif](<public/wordcloud.png>)
 
 # Artictecture
-![multilingual gif](<public/web_structure.jpg>)
+![multilingual gif](<public/web_structure.png>)
 
 # Database Schema
 ![multilingual gif](<public/database.png>)
