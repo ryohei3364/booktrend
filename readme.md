@@ -10,7 +10,7 @@ BookTrend is a web platform that visualizes global bookstore bestseller trends w
 
 | Account | Password |
 |--------|----------|
-| test   | test@test |
+| test@test   | test |
 
 </div>
 
