@@ -32,7 +32,7 @@
         "email": {
           "label": "繼續 Email 登入",
           "options": [
-            {"title": "登入會員", "email": "電子郵件", "password": "密碼", "submit": "送出", "message": "還沒有帳號？", "goto": "註冊"}
+            {"title": "登入會員", "email": "電子郵件: test@test", "password": "密碼: test", "submit": "送出", "message": "還沒有帳號？", "goto": "註冊"}
           ]
         }
     },

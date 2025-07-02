@@ -32,7 +32,7 @@
         "email": {
           "label": "E-Mail",
           "options": [
-            {"title": "Anmelden mitglied", "email": "E-Mail", "password": "Passwort", "submit": "Senden", "message": "Noch kein Konto?", "goto": "Registrieren"}
+            {"title": "Anmelden mitglied", "email": "E-Mail: test@test", "password": "Passwort: test", "submit": "Senden", "message": "Noch kein Konto?", "goto": "Registrieren"}
           ]
         }
     },

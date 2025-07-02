@@ -32,7 +32,7 @@
         "email": {
           "label": "S'inscrire un Email",
           "options": [
-            {"title": "Se connecter", "name": "Nom", "email": "E-mail", "password": "Mot de passe", "submit": "Envoyer", "message": "Pas encore de compte ?", "goto": "Envoyer"}
+            {"title": "Se connecter", "name": "Nom", "email": "E-mail: test@test", "password": "Mot de passe: test", "submit": "Envoyer", "message": "Pas encore de compte ?", "goto": "Envoyer"}
           ]
         }
     },

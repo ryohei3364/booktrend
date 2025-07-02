@@ -32,7 +32,7 @@
         "email": {
           "label": "Continue Email login",
           "options": [
-            {"title": "Sign in", "email": "Email", "password": "Password", "submit": "Submit", "message": "Don't have an account yet?", "goto": "Register"}
+            {"title": "Sign in", "email": "Email: test@test", "password": "Password: test", "submit": "Submit", "message": "Don't have an account yet?", "goto": "Register"}
           ]
         }
     },

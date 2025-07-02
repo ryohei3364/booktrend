@@ -90,7 +90,8 @@ function showLoginButton() {
 
 // 5. 點擊導覽列登入按鈕 → 開啟選擇方式 dialog
 loginNav.addEventListener("click", () => {
-  loginDialog.showModal();
+  // loginDialog.showModal();
+  loginEmailDialog.showModal();
 });
 
 // 6. 點擊 Google 登入
