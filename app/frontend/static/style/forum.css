@@ -1,0 +1,80 @@
+.box {
+  outline: 1px dashed var(--mintgreen-color);
+}
+
+main {
+	margin-top: 65px;
+}
+main .left h2 {
+	font-size: var(--fs24);
+	color: var(--darkgrey-color);
+	margin: 2rem 0;
+}
+main .left .inner-left {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+main .left .inner-left .box {
+	width: 40rem;
+	padding: 2rem;
+  margin-bottom: 1.5rem;  /* ✅ 增加 box 間距 */
+  display: flex;          /* ✅ 確保內容橫向排列 */
+  border-radius: 0.5rem;    /* 可選，美觀圓角 */
+	background-color: white;
+}
+main .left .inner-left .box .img {
+	width: 6rem;
+	height: 6rem;
+	border-radius: 0.8rem;
+	overflow: hidden;
+	position: relative;
+	/* display: none; */
+}
+main .left .inner-left .box .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* ✅ 重點 */
+  display: block;
+}
+main .left .inner-left .box .details {
+	padding-left: 1.2rem;
+	background-color: transparent;
+}
+main .left .inner-left .box .details p {
+	font-size: 1rem;
+	text-transform: capitalize;
+	background-color: transparent;
+}
+main .left .inner-left .box .details h3 {
+	font-size: var(--fs18);
+	font-weight: 700;
+	color: var(--mintgreen-color);
+	letter-spacing: -0.02em;
+	background-color: transparent;
+}
+main .left .inner-left .box .details .sub-details {
+	width: 20rem;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	background-color: transparent;
+	
+}
+main .left .inner-left .box .details .sub-details span {
+	font-size: 0.8rem;
+	color: var(--darkgrey-color);
+	background-color: transparent;
+}
+main .left .inner-left .box .details .sub-details .comment {
+	text-align: center;
+  padding: 0.2rem 0.5rem;          /* ✅ 調整內距讓底色不會太大片 */
+  background-color: lightgreen;   /* ✅ 保留綠色底，如果你要透明就設為 transparent */
+  font-size: 0.9rem;              /* ✅ 字不要太大，1.3rem 比較像標題 */
+  display: inline-flex;           /* ✅ inline-flex 讓它不佔一整行 */
+  align-items: center;
+  gap: 0.3rem;
+  border-radius: 0.3rem;
+  line-height: 1.2;               /* ✅ 控制行高防止底色過高 */
+}

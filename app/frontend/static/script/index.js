@@ -9,6 +9,7 @@ async function initPage() {
   const { countryList } = await loadLang();
   // renderNav(langContent);
   renderCard(countryList);
+  // ✅ 語言載入完再顯示畫面
 }
 
 let sectionRenderQueue = [];
@@ -69,6 +70,7 @@ function createCountryCard(data) {
 
 	const title = document.createElement("div");
   title.className = "main__card--title";
+  title.title = data.country;  // ✅ 滑鼠懸停時顯示
 
 	const span = document.createElement('span');
   span.className = "main__card--country";
@@ -122,22 +124,6 @@ function createCountryCard(data) {
   });
   return card;
 }
-
-// async function sendUserLanguage() {
-//   const userLanguages = navigator.languages.join(',');
-//   const response = await fetch('/api/language', {
-//     headers: {
-//       "Accept-Language": userLanguages
-//     }
-//   });
-//   const data = await response.json();
-//   console.log("後端收到的語言偏好:", data);
-// }
-
-// async function fetchCardData() {
-//   const response = await fetch("/api/language");
-//   return response.json();
-// }
 
 async function fetchCategoryData(bookstoreId) {
   const response = await fetch(`/api/card/category/${bookstoreId}`);
@@ -340,19 +326,6 @@ function setupToggle(sectionDiv, header, content) {
   content.classList.remove("collapsed");
   header.querySelector("svg")?.replaceWith(createSvgIcon("less"));
 
-  // let isOpen = false;
-
-  // sectionDiv.addEventListener("mouseenter", () => {
-  //   isOpen = true;
-  //   content.classList.remove("collapsed");
-  //   header.querySelector("svg")?.replaceWith(createSvgIcon("less"));
-  // });
-
-  // sectionDiv.addEventListener("mouseleave", () => {
-  //   isOpen = false;
-  //   content.classList.add("collapsed");
-  //   header.querySelector("svg")?.replaceWith(createSvgIcon("more"));
-  // });
   sectionDiv.addEventListener("click", () => {
     isOpen = !isOpen;
 
@@ -377,7 +350,6 @@ function createChart(canvas, chartData, defaultType = "doughnut") {
 
   // 從 chartData 取出翻譯對應表（如果有）
   const translations = chartData.translations || {};
-  console.log(translations);
 
   // 判斷是否為完整的 Chart.js 設定（含 type 和 options）
   const config = chartData.type

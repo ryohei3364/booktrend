@@ -7,6 +7,10 @@ section{
   font-size: 36px;
   color: red;
 } */
+main {
+  margin-top: 65px; /* 必須等於 navbar 高度 */
+  padding: 5px;
+}
 .background{
 	width: 100%;
 	height: 600px;
