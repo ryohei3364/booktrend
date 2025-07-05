@@ -10,6 +10,17 @@ services:
     networks:
       - backend
 
+  taipei-app:
+    image: ryohei3364/taipei-app:latest
+    container_name: taipei-app
+    ports:
+      - "3001:3000"
+    env_file:
+      - ./.env
+    restart: on-failure
+    networks:
+      - backend
+
   nginx:
     image: ryohei3364/booktrend-nginx:latest
     container_name: booktrend-nginx
@@ -18,10 +29,14 @@ services:
       - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./ssl/certificate.crt:/etc/nginx/ssl/certificate.crt:ro
-      - ./ssl/private.key:/etc/nginx/ssl/private.key:ro
+      # - ./ssl/certificate.crt:/etc/nginx/ssl/certificate.crt:ro
+      # - ./ssl/private.key:/etc/nginx/ssl/private.key:ro
+      - /etc/letsencrypt/live/booktrend.online:/etc/letsencrypt/live/booktrend.online:ro
+      - /etc/letsencrypt/archive/booktrend.online:/etc/letsencrypt/archive/booktrend.online:ro
+      - /etc/letsencrypt/renewal:/etc/letsencrypt/renewal:ro
     depends_on:
       - booktrend-app
+      - taipei-app
     networks:
       - backend
 
