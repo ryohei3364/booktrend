@@ -1,6 +1,6 @@
 services:
   booktrend-app:
-    image: ryohei3364/booktrend-app:latest
+    image: ryohei3364/booktrend-app:${TAG}
     ports:
       - "3000:3000"
     env_file:

@@ -47,7 +47,7 @@ jobs:
         echo "$EC2_KEY_BASE64" | base64 -d > secure.pem
         chmod 600 secure.pem
 
-    - name: Set deploy environment variables
+    - name: Set deploy environment variables # 遠端有分正式 (~/booktrend) 跟測試 (~/booktrend-test) 兩個目錄
       run: |
         if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
           echo "DEPLOY_DIR=booktrend" >> $GITHUB_ENV
