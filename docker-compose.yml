@@ -1,38 +1,14 @@
-# 執行 build 命令時，要在 BookTrend 目錄執行
-
 services:
   booktrend-app:
-    build:
-      context: ./app   # 指向 BookTrend/app
-      dockerfile: Dockerfile  # 會去 ./app/Dockerfile
-    container_name: booktrend-app
+    image: ryohei3364/booktrend-app:latest
     ports:
       - "3000:3000"
     env_file:
-      - ./app/backend/.env
+      - ./.env
     restart: on-failure
     networks:
-      - backend
-
-  nginx:
-    build:
-      context: ./nginx  # 指向 BookTrend/nginx
-      dockerfile: Dockerfile   # 會去 BookTrend/.nginx/Dockerfile
-    container_name: booktrend-nginx
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - /home/ec2-user/booktrend/ssl/certificate.crt:/etc/nginx/ssl/certificate.crt:ro
-      - /home/ec2-user/booktrend/ssl/private.key:/etc/nginx/ssl/private.key:ro
-      # - ./nginx/ssl/certificate.crt:/etc/nginx/ssl/certificate.crt:ro
-      # - ./nginx/ssl/private.key:/etc/nginx/ssl/private.key:ro
-    depends_on:
-      - booktrend-app
-    networks:
-      - backend
+      - shared-net
 
 networks:
-  backend:
-    driver: bridge
+  shared-net:
+    external: true # 其他使用 external: true 的 docker-compose.yml 就可以加入這個網路
