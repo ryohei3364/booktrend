@@ -80,16 +80,19 @@ jobs:
         TAG: ${{ env.TAG }}
       run: |
         ssh -o StrictHostKeyChecking=no -i secure.pem $EC2_USER@$EC2_HOST << EOF
+          export TAG="${TAG}"  # ✅ 這一行讓遠端 shell 拿到 TAG
+          export DEPLOY_DIR="${{ env.DEPLOY_DIR }}"
+          
           cd ~/${DEPLOY_DIR}
 
           echo "🧼 清除舊容器..."
-          docker compose down
+          TAG=${TAG} docker compose down
 
           echo "📦 拉取新 image..."
-          docker compose pull ryohei3364/booktrend-app:${TAG}
+          TAG=${TAG} docker compose pull
 
           echo "🚀 啟動服務..."
-          docker compose up -d
+          TAG=${TAG} docker compose up -d
 
           echo "✅ 部署完成"
         EOF
