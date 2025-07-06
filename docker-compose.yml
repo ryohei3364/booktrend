@@ -2,7 +2,7 @@ services:
   booktrend-app:
     image: ryohei3364/booktrend-app:${TAG}
     ports:
-      - "3000:3000"
+      - "3002:3000" # 測試環境，對外暴露3002，容器內仍是3000
     env_file:
       - ./.env
     restart: on-failure
