@@ -57,6 +57,9 @@ jobs:
           echo "TAG=develop" >> $GITHUB_ENV
         fi
 
+    - name: Generate .env file from secret
+      run: echo "${{ secrets.ENV_CONTENT }}" > .env
+
     # 6. Rsync 設定檔到 EC2
     - name: Rsync BookTrend files
       env:
