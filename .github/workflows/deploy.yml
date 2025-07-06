@@ -52,9 +52,11 @@ jobs:
         if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
           echo "DEPLOY_DIR=booktrend" >> $GITHUB_ENV
           echo "TAG=latest" >> $GITHUB_ENV
+          echo "HOST_PORT=3000" >> $GITHUB_ENV
         else
           echo "DEPLOY_DIR=booktrend-test" >> $GITHUB_ENV
           echo "TAG=develop" >> $GITHUB_ENV
+          echo "HOST_PORT=3002" >> $GITHUB_ENV        
         fi
 
     - name: Generate .env file from secret
@@ -78,21 +80,20 @@ jobs:
         EC2_HOST: ${{ secrets.EC2_HOST }}
         DEPLOY_DIR: ${{ env.DEPLOY_DIR }}
         TAG: ${{ env.TAG }}
+        HOST_PORT: ${{ env.HOST_PORT }}
       run: |
         ssh -o StrictHostKeyChecking=no -i secure.pem $EC2_USER@$EC2_HOST << EOF
-          export TAG="${TAG}"  # ✅ 這一行讓遠端 shell 拿到 TAG
-          export DEPLOY_DIR="${{ env.DEPLOY_DIR }}"
-          
+
           cd ~/${DEPLOY_DIR}
 
           echo "🧼 清除舊容器..."
-          TAG=${TAG} docker compose down
+          TAG="${TAG}" HOST_PORT="${HOST_PORT}" docker compose down
 
           echo "📦 拉取新 image..."
-          TAG=${TAG} docker compose pull
+          TAG="${TAG}" HOST_PORT="${HOST_PORT}" docker compose pull
 
           echo "🚀 啟動服務..."
-          TAG=${TAG} docker compose up -d
+          TAG="${TAG}" HOST_PORT="${HOST_PORT}" docker compose up -d
 
           echo "✅ 部署完成"
         EOF
