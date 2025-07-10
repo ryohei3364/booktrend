@@ -14,7 +14,12 @@ jobs:
     # 1. 取得程式碼
     - name: Checkout source code
       uses: actions/checkout@v3
-
+      
+    # 移除 console.log
+    - name: Remove console.log from JS files
+      run: |
+        find ./static/js -name "*.js" -exec sed -i '/console\.log/d' {} \;
+      
     # 2. 登入 Docker Hub
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
