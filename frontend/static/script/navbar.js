@@ -23,11 +23,11 @@ export async function initNavbar() {
         const user = result.data;
         updateMemberInfo(user);  // 🔁 呼叫更新函式
       } else {
-        console.warn("token 無效，登出中");
+        // console.warn("token 無效，登出中");
         localStorage.removeItem("token");
       }
     } catch (err) {
-      console.error("取得會員資料失敗：", err);
+      // console.error("取得會員資料失敗：", err);
       localStorage.removeItem("token");
     }
   }

@@ -1,4 +1,4 @@
-console.log("✅ ranking.js loaded");
+// console.log("✅ ranking.js loaded");
 
 import { initNavbar } from './navbar.js';
 await initNavbar(); 
@@ -88,7 +88,7 @@ async function renderRanking(bookstoreId, chartType, rankingList) {
 (async () => {
   try {
     const rankingList = await fetchRankingList(); // 只呼叫一次
-    console.log("✅ rankingList:", rankingList);
+    // console.log("✅ rankingList:", rankingList);
 
     for (const bookstoreId of bookstoreIdList) {
       for (const chartType of chartTypeList) {
@@ -97,6 +97,6 @@ async function renderRanking(bookstoreId, chartType, rankingList) {
       }
     }
   } catch (error) {
-    console.error("Error loading rankings:", error);
+    // console.error("Error loading rankings:", error);
   }
 })();
