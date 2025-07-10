@@ -25,13 +25,13 @@ export async function loadLang() {
 export function switchLang() {
   // 綁定語言選單的變更事件
   const langSelect = document.getElementById("language-select");
-  console.log('langSelect', langSelect)
+  // console.log('langSelect', langSelect);
 
   if (langSelect) {
     langSelect.addEventListener("change", async (e) => {
       const selectedLang = e.target.value;
       setLangPrefer(selectedLang);  // ✅ 更新 cookie
-      console.log("語言已變更為：", selectedLang);
+      // console.log("語言已變更為：", selectedLang);
       location.reload();  // ✅ 重新載入頁面，讓語言生效
     });
 
@@ -54,10 +54,10 @@ export function switchLang() {
 export async function getUserCookie() {
   const langcode = getCookie("booktrend-lang");
   if (langcode) {
-    console.log("使用者語言偏好為：", langcode);
+    // console.log("使用者語言偏好為：", langcode);
     return langcode;
   } else {
-    console.log("未設定語言偏好，讀取使用者的語言偏好，並設置成cookies");
+    // console.log("未設定語言偏好，讀取使用者的語言偏好，並設置成cookies");
     const langcode = navigator.languages[0];  // 只取第一個語言
     setLangPrefer(langcode);
     return langcode;

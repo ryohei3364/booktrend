@@ -1,4 +1,4 @@
-console.log("✅ auth.js loaded");
+// console.log("✅ auth.js loaded");
 
 const loginNav = document.getElementById('loginNav');
 const loginDialog = document.getElementById('loginDialog');
@@ -12,10 +12,6 @@ const registerForm = document.getElementById("registerForm");
 const goToRegister = document.getElementById("goToRegister");
 const userIcon = document.querySelector(".menu__item--member--user");
 const userPic = document.getElementById("userPic");
-// const memberName = document.getElementById('memberName');
-// const memberEmail = document.getElementById('memberEmail');
-// const dialogs = document.querySelectorAll("dialog");
-// const registerError = document.getElementById("registerError");
 
 
 // 1️⃣ Google OAuth callback: 儲存 token 並 reload
@@ -30,7 +26,7 @@ if (tokenFromUrl) {
 // 2️⃣ 自動登入檢查
 window.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("token");  // 🔁 從這裡才開始正式讀取
-  console.log('token:', token);
+  // console.log('token:', token);
 
   if (token) {
     try {
@@ -45,7 +41,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       if (res.ok) {
         // ✅ 登入成功：隱藏登入按鈕，顯示使用者頭像
         const user = result.data;
-        console.log('user:', user);
+        // console.log('user:', user);
         showUser(user);
         // updateMemberPage(user);
       } else {
@@ -78,15 +74,6 @@ function showLoginButton() {
   userIcon.style.display = "none";
   loginNav.style.display = "inline-block";
 }
-
-// // 4️⃣ 更新會員頁面用戶資訊（如果會員頁有）
-// function updateMemberPage(user) {
-//   memberName.textContent = user.name;
-//   memberEmail.textContent = user.email;
-//   // if (user.picture) {
-//   //   document.getElementById("memberPic").src = user.picture;
-//   // }
-// }
 
 // 5. 點擊導覽列登入按鈕 → 開啟選擇方式 dialog
 loginNav.addEventListener("click", () => {
@@ -158,7 +145,7 @@ registerForm.addEventListener("submit", async (e) => {
     body: JSON.stringify({ name, email, password }),
   });
   const result = await res.json();
-  console.log('result', result)
+  // console.log('result', result);
 
   if (res.ok) {
     localStorage.setItem("token", result.token);

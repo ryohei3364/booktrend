@@ -1,4 +1,4 @@
-console.log("✅ member.js loaded");
+// console.log("✅ member.js loaded");
 
 import { initNavbar } from './navbar.js';
 await initNavbar(); 
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     const result = await res.json();
-    console.log("👤 會員資料：", result);
+    // console.log("👤 會員資料：", result);
 
     if (res.ok) {
       const user = result.data;
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       window.location.href = "/";
     }
   } catch (err) {
-    console.error("⚠️ 無法取得會員資料", err);
+    // console.error("⚠️ 無法取得會員資料", err);
     localStorage.removeItem("token");
     window.location.href = "/";
   }
