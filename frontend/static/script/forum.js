@@ -1,4 +1,4 @@
-console.log("✅ forum.js loaded");
+// console.log("✅ forum.js loaded");
 
 import { initNavbar } from './navbar.js'; 
 import { switchLang } from './language.js';

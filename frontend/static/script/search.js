@@ -33,14 +33,14 @@ function renderSearch() {
   fetch('/api/language')
     .then((res) => res.json())
     .then((i18n) => {
-      console.log(i18n.content[0].search_list);
+      // console.log(i18n.content[0].search_list);
       const langData = i18n.content[0].search_list[0];  // ✅ 只取需要的部分
-      console.log("載入的語系內容：", langData);
+      // console.log("載入的語系內容：", langData);
       cachedLang = langData;
       updateDOMWithLang(langData);
     })
     .catch((err) => {
-      console.error("載入語系 JSON 發生錯誤：", err);
+      // console.error("載入語系 JSON 發生錯誤：", err);
     });
 }
 
@@ -56,7 +56,7 @@ function updateDOMWithLang(data) {
   // ✅ 另外呼叫 fetchHotSearches 來填熱門關鍵字
   fetchHotSearches()
     .then((hotKeywords) => {
-      console.log("🔥 熱門搜尋關鍵字：", hotKeywords);
+      // console.log("🔥 熱門搜尋關鍵字：", hotKeywords);
 
       for (let i = 1; i <= 6; i++) {
         const el = document.getElementById(`topic${i}`);
@@ -69,7 +69,7 @@ function updateDOMWithLang(data) {
       }
     })
     .catch((err) => {
-      console.error("載入熱門搜尋失敗：", err);
+      // console.error("載入熱門搜尋失敗：", err);
     });
 }
 
@@ -81,7 +81,7 @@ function triggerSearch(keyword) {
 }
 
 function searchBooks(keyword) {
-  console.log("搜尋關鍵字：", keyword);
+  // console.log("搜尋關鍵字：", keyword);
   fetch(`/api/search?keyword=${encodeURIComponent(keyword)}`)
     .then((res) => res.json())
     .then((results) => {
@@ -128,7 +128,7 @@ function searchBooks(keyword) {
       });
     })
     .catch((err) => {
-      console.error("搜尋失敗：", err);
+      // console.error("搜尋失敗：", err);
       document.getElementById("searchResults").textContent =
         "搜尋失敗，請稍後再試。";
     });
