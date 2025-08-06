@@ -51,7 +51,7 @@ def generate_author(bookstore_id: int):
         COUNT(b.author_id) AS times
     FROM books b
     JOIN authors a ON b.author_id = a.id
-    WHERE b.bookstore_id = %s
+    WHERE b.bookstore_id = %s AND a.id NOT IN (400, 963)
     GROUP BY a.id, a.name
     ORDER BY times DESC
     LIMIT 3;
