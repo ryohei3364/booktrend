@@ -77,8 +77,8 @@ function showLoginButton() {
 
 // 5. 點擊導覽列登入按鈕 → 開啟選擇方式 dialog
 loginNav.addEventListener("click", () => {
-  // loginDialog.showModal();
-  loginEmailDialog.showModal();
+  loginDialog.showModal();
+  // loginEmailDialog.showModal();
 });
 
 // 6. 點擊 Google 登入
@@ -100,7 +100,8 @@ submitEmail.addEventListener("click", () => {
 if (goToRegister) {
   goToRegister.addEventListener("click", (e) => {
     e.preventDefault();
-    loginEmailDialog.close();
+    loginDialog.showModal();
+    // loginEmailDialog.close();
     registerDialog.showModal();
   });
 }
@@ -124,7 +125,8 @@ loginForm.addEventListener("submit", async (e) => {
     window.location.href = "/";
   } else if (res.status === 404) {
     // ✅ Email 沒註冊 → 自動跳轉註冊頁
-    loginEmailDialog.close();
+    loginDialog.showModal();
+    // loginEmailDialog.close();
     registerDialog.showModal();
     document.getElementById("registerEmail").value = email;
   } else {

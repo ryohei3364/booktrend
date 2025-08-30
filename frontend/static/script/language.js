@@ -11,7 +11,7 @@ export async function loadLang() {
       }
     });
     const result = await response.json();
-    // console.log("語言 API 回傳資料:", result);
+    console.log("語言 API 回傳資料:", result);
     // 第一個元素是語言對應表
     const langContent = result.content[0]; // nav + card_title
     const countryList = result.content.slice(1); // 其餘為國家資訊
