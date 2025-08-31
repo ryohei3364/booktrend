@@ -171,6 +171,7 @@ input{
   display: none;
 }
 .menu__item--member--login {
+  min-width: 80px;    
   height: 38px;
   padding: 0rem 1rem;
   font-size: 1rem;
