@@ -163,6 +163,7 @@ input{
 .menu__item--header--a:hover::after {
   width: 150%;
 }
+
 .menu__item--language--toggle:hover {
   color: var(--mintgreen-color);
 }
@@ -188,6 +189,8 @@ input{
 }
 
 .language-select {
+  width: 110px;       /* 固定寬度 */
+  height: 38px;       /* 與 navbar 高度一致 */
   padding: 0.5rem 1rem;
   font-size: 1rem;
   background-color: var(--mintgreen-color);

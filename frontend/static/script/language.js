@@ -47,6 +47,8 @@ export function switchLang() {
         langSelect.value = 'en-US';  // fallback 預設
       }
     }
+    // ✅ 保證語言選單顯示
+    document.getElementById("langSwitcher").style.visibility = "visible";
   }
 };
 
