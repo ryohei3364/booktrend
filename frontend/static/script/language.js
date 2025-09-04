@@ -4,6 +4,20 @@ export async function loadLang() {
   // 如果 cookie 中有設定語言偏好，就使用它；否則使用瀏覽器提供的語言清單
   const userLang = cookieLang || navigator.languages[0];
   // const userLang = cookieLang ? cookieLang : navigator.languages.join(',');
+  const cacheKey = `lang-${userLang}`;
+
+  // 先檢查 localStorage 有沒有快取
+  const cached = localStorage.getItem(cacheKey);
+  if (cached) {
+    try {
+      const parsed = JSON.parse(cached);
+      return parsed; // { langContent, countryList }
+    } catch (err) {
+      console.warn("語言快取解析失敗，清除後重新載入");
+      localStorage.removeItem(cacheKey);
+    }
+  }
+
   try {
     const response = await fetch('/api/language/', {
       headers: {
@@ -15,6 +29,9 @@ export async function loadLang() {
     // 第一個元素是語言對應表
     const langContent = result.content[0]; // nav + card_title
     const countryList = result.content.slice(1); // 其餘為國家資訊
+    // 存進 localStorage
+    localStorage.setItem(cacheKey, JSON.stringify({ langContent, countryList }));
+
     return { langContent, countryList };
   } catch (error) {
     // console.error("載入語言檔失敗:", error);
@@ -23,16 +40,17 @@ export async function loadLang() {
 }
 
 export function switchLang() {
-  // 綁定語言選單的變更事件
   const langSelect = document.getElementById("language-select");
-  // console.log('langSelect', langSelect);
-
   if (langSelect) {
-    langSelect.addEventListener("change", async (e) => {
+    langSelect.addEventListener("change", (e) => {
       const selectedLang = e.target.value;
-      setLangPrefer(selectedLang);  // ✅ 更新 cookie
-      // console.log("語言已變更為：", selectedLang);
-      location.reload();  // ✅ 重新載入頁面，讓語言生效
+      const currentLang = getLangFromCookie();
+
+      if (selectedLang !== currentLang) {
+        setLangPrefer(selectedLang); // 更新 cookie
+        localStorage.clear();       // ✅ 清空舊快取，避免混用
+        location.reload();          // ✅ 只在語言變更時刷新
+      }
     });
 
     // 取得目前 cookie 裡的語言
