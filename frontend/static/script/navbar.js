@@ -9,6 +9,37 @@ export async function initNavbar() {
 
   const selectLang = document.getElementById("langSwitcher");
   selectLang.style.visibility = "visible";
+
+  // ✅ 只攔截同語系的導航點擊
+  document.querySelectorAll(".menu__item--header--a").forEach(link => {
+    link.addEventListener("click", (e) => {
+      const href = link.getAttribute("href");
+
+      // 如果網址裡包含當前語系，才阻止 reload
+      if (href.includes(`/` + lang + `/`)) {
+        e.preventDefault();
+        history.pushState({}, "", href);
+
+        // 簡單：直接用 location.pathname 判斷要顯示哪個頁面
+        if (href.includes("search")) {
+          import("./search.js").then(m => m.initSearch());
+        } else if (href.includes("ranking")) {
+          import("./ranking.js").then(m => m.initRanking());
+        }
+      }
+      // 如果不是同語系，就讓瀏覽器正常刷新
+    });
+  });
+
+  // 處理上一頁 / 下一頁
+  window.addEventListener("popstate", () => {
+    if (location.pathname.includes("search")) {
+      import("./search.js").then(m => m.initSearch());
+    } else if (location.pathname.includes("ranking")) {
+      import("./ranking.js").then(m => m.initRanking());
+    }
+  });
+
   // 🔐 自動登入檢查並更新會員資料
   const token = localStorage.getItem("token");
   if (token) {
