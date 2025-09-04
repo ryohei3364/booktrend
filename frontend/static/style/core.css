@@ -189,28 +189,45 @@ input{
   background-color: #27ae60; /* 深一點的綠 */
 }
 
-.language-select {
-  min-width: 110px;       /* 固定寬度 */
-  height: 38px;       /* 與 navbar 高度一致 */
+/* 外層容器：保持位置與大小 */
+#langSwitcher {
+  min-width: 110px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 內層 select：控制顯示樣式 */
+#language-select {
+  width: 100%;
+  height: 100%;
   padding: 0.5rem 1rem;
   font-size: 1rem;
-  background-color: var(--mintgreen-color);
+  background-color: var(--mintgreen-color); /* ✅ 按鈕底色固定存在 */
   color: white;
   border: none;
   border-radius: 25px;
   cursor: pointer;
-  appearance: none; /* 移除原生樣式 */
+
+  /* 移除原生箭頭，使用自訂 */
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+
+  /* 自訂箭頭 */
   background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.8rem center;
   background-size: 0.8rem;
-  padding-right: 2rem; /* 給箭頭留空間 */
+  padding-right: 2rem;
+
   transition: background-color 0.3s ease;
 }
 
-.language-select:hover {
+/* hover 效果 */
+#language-select:hover {
   background-color: var(--darkgreen-color);
 }
+
 
