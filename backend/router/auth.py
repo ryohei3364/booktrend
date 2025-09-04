@@ -29,6 +29,7 @@ auth_router = APIRouter(prefix="/api/auth", tags=["auth"])
 
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
 GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:8000")
 REDIRECT_URI = "https://booktrend.online/api/auth/google/callback"
 REDIRECT_URI_test = "http://localhost:8000/api/auth/google/callback"
 
@@ -92,9 +93,8 @@ def google_oauth_callback(code: str):
         # return JSONResponse({"ok": True, "token": jwt_token, "user": db_user})   
         
         # Step 5: 透過 RedirectResponse 導回前端頁面，JWT 放在 query string
-        frontend_redirect = "http://localhost:8000"  # 或 production URL
-        redirect_url_test = f"{frontend_redirect}?token={jwt_token}"
-        return RedirectResponse(redirect_url_test) 
+        redirect_url = f"{FRONTEND_URL}?token={jwt_token}"
+        return RedirectResponse(redirect_url)
 
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": "callback 錯誤", "detail": str(e)})
