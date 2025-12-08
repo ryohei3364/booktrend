@@ -66,6 +66,8 @@ jobs:
 
     - name: Generate .env file from secret
       run: echo "${{ secrets.ENV_CONTENT }}" > .env
+           echo "TAG=${{ env.TAG }}" >> .env
+           echo "HOST_PORT=${{ env.HOST_PORT }}" >> .env      
 
     # 6. Rsync 設定檔到 EC2
     - name: Rsync BookTrend files
